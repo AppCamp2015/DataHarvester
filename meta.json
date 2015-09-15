@@ -1,15 +1,17 @@
 {
-  "label": "WMS-API DDL server",
-  "children": [
     {
-      "label": "Sentinel-1: Ice and snow monitoring (Greenland, The Arctic)",
-      "children": [
-        {
-          "id": "obsS1seriesGreenland/Backscatter",
-          "label": "Land/ice roughness",
-          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel1Catalog.html?dataset=obsS1SeriesGreenland"
-        }
-      ]
+        "label": "WMS-API DDL server",
+        "children": [
+            {
+                "label": "Sentinel-1: Ice and snow monitoring (Greenland, The Arctic)",
+                "children": [
+                    {
+                        "id": "obsS1seriesGreenland/Backscatter",
+                        "label": "Land/ice roughness",
+                        "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel1Catalog.html?dataset=obsS1SeriesGreenland"
+                    }
+                ]
+            }
     },
     {
       "label": "Sentinel-1: Soil moisture (Twente-area, The Netherlands)",
