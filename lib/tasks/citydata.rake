@@ -1,6 +1,6 @@
 namespace :citydata do
 	desc "Generate Data for a country"
-	task generate_city_latlong: :environment do
+	task generate_country_latlong: :environment do
 	print 'Running task \n'
   	require 'json'
   	require 'csv'
@@ -15,7 +15,7 @@ namespace :citydata do
 		maxLat = latitude + roughFactor
 		minLong = longitude - roughFactor
 		maxLong = longitude + roughFactor
-		positionObject = {"minLat" => minLat, "maxLat" => maxLat, "minLong" => minLong, "maxLong" => maxLong, "lat" => latitude, "long" => longitude, "Altitude" => cityObject["altitude"]} 
+		positionObject = {"minLat" => minLat, "maxLat" => maxLat, "minLong" => minLong, "maxLong" => maxLong, "lat" => latitude, "long" => longitude, "Altitude" => cityObject["Altitude"]} 
 		# binding.pry
 	end
 
@@ -25,9 +25,6 @@ namespace :citydata do
 	countryCsvObject = csvObject.select {|csvLine| csvLine[1] == country}
 	columns = csvObject.first
 
-	# On each line give the key value pair for the array
-
-	# mappedArray = countryCsvObject.each.each_with_index.map{|field,index| [columns[index%columns.length],line[index%columns.length]]}
 	mappedArray = []
 
 	countryCsvObject.each.with_index do |city,index|
@@ -44,16 +41,18 @@ namespace :citydata do
 		objectArray[index] = cityHash
 	end
 
-	binding.pry
-
 	objectArray.each.with_index do |city,index|
 		objectArray[index]['position'] =  Generate10MileLatLongBoundingBox(city)
 	end
 
 	puts objectArray.first(10)
 
+	puts "Writing to country JSON file"
+	binding.pry
 	# create a has from each mapped array and create an array of objects.
-
+	f = File.new(country+".json","w")
+	f.write(JSON.pretty_generate(objectArray))
+	f.close
 
 end
 end
