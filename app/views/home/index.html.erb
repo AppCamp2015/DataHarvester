@@ -79,7 +79,7 @@
 
 		      	var minlat = $("#minlat").val(); 
 		      	var maxlat = $("#maxlat").val();
-		      	var minlong = $("#maxlong").val();
+		      	var minlong = $("#minlong").val();
 		      	var maxlong = $("#maxlong").val();
 
 
@@ -95,7 +95,8 @@
                 }
 
             console.log("Login was successful: " + success);
-            service.jobs().create("| `co2country_bbox(" + minLat + "," + maxLat + "," + minLon + ","+ maxLon +")`",{
+		console.log("`co2countrybbox(" + minlat + "," + maxlat + "," + minlong + ","+ maxlong +")`");
+            service.jobs().create(" `co2countrybbox(" + minlat + "," + maxlat + "," + minlong + ","+ maxlong +")`",{
                 status_buckets: 300
             }, function(err, job){
                 if(err){
