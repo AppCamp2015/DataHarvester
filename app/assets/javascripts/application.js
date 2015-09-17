@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require splunk
 //= require_directory .
+//= require ol
 //= require twitter/bootstrap	

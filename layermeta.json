@@ -1,0 +1,1475 @@
+{
+  "label": "WMS-API DDL server",
+  "children": [
+    {
+      "label": "Sentinel-1: Ice and snow monitoring (Greenland, The Arctic)",
+      "children": [
+        {
+          "id": "obsS1seriesGreenland/Backscatter",
+          "label": "Land/ice roughness",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel1Catalog.html?dataset=obsS1SeriesGreenland"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-1: Soil moisture (Twente-area, The Netherlands)",
+      "children": [
+        {
+          "id": "simS1seriesTwenteNetherlands/smc",
+          "label": "Top-soil layer moisture content",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel1Catalog.html?dataset=simS1seriesTwenteNetherlands"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-1: Land Displacement (Ruhr-area, Germany)",
+      "children": [
+        {
+          "id": "simS1seriesRuhrGermany/displacement",
+          "label": "Land displacement",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel1Catalog.html?dataset=simS1seriesRuhrGermany"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-1: Sea-ice thickness retrieval",
+      "children": [
+        {
+          "id": "simS1seriesSmosIceThickness/sea_ice_thickness",
+          "label": "Sea-ice thickness",
+          "moreinfo": "http://earth.esa.int/smos07/pres/28_pres.pdf"
+        },
+        {
+          "id": "simS1seriesSmosIceThickness/saturation_ratio",
+          "label": "ratio of retrieved ice thickness and maximal retrievable ice thickness",
+          "moreinfo": "http://earth.esa.int/smos07/pres/28_pres.pdf"
+        },
+        {
+          "id": "simS1seriesSmosIceThickness/nPair",
+          "label": "number of TBh and TBv pairs available",
+          "moreinfo": "http://earth.esa.int/smos07/pres/28_pres.pdf"
+        },
+        {
+          "id": "simS1seriesSmosIceThickness/land",
+          "label": "land_binary_mask",
+          "moreinfo": "http://earth.esa.int/smos07/pres/28_pres.pdf"
+        },
+        {
+          "id": "simS1seriesSmosIceThickness/ice_thickness_uncertainty",
+          "label": "sea_ice_thickness total_uncertainty (sum of estimated uncertainties with standard_deviations of input parameters ocean salinity, ice temperature, and SMOS brightness temperature)",
+          "moreinfo": "http://earth.esa.int/smos07/pres/28_pres.pdf"
+        },
+        {
+          "id": "simS1seriesSmosIceThickness/Tsurf",
+          "label": "SMOS derived snow surface temperature",
+          "moreinfo": "http://earth.esa.int/smos07/pres/28_pres.pdf"
+        },
+        {
+          "id": "simS1seriesSmosIceThickness/TB_uncertainty",
+          "label": "brightness temperature uncertainty defined as one standard deviation of TB devided by the sqrt(nPair)",
+          "moreinfo": "http://earth.esa.int/smos07/pres/28_pres.pdf"
+        },
+        {
+          "id": "simS1seriesSmosIceThickness/TB",
+          "label": "brightness temperature intensity (TBh+TBv)/2",
+          "moreinfo": "http://earth.esa.int/smos07/pres/28_pres.pdf"
+        },
+        {
+          "id": "simS1seriesSmosIceThickness/RFI_ratio",
+          "label": "percent of RFI-contaminated measurements in total measurements",
+          "moreinfo": "http://earth.esa.int/smos07/pres/28_pres.pdf"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-1: Ocean Winds, Daily Ascending-node (now - Global)",
+      "children": [
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/wvc_index",
+          "label": "cross track wind vector cell number",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/air_density",
+          "label": "air density at 10 m",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/se_model_speed",
+          "label": "stress equivalent model wind speed at 10 m",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/se_eastward_model_wind",
+          "label": "stress equivalent model wind u component at 10 m",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/se_northward_model_wind",
+          "label": "stress equivalent model wind v component at 10 m",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/stress_divergence",
+          "label": "divergence of ocean surface stress",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/stress_curl",
+          "label": "rotation of ocean surface stress",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/model_stress_divergence",
+          "label": "model divergence of ocean surface stress",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/model_stress_curl",
+          "label": "model rotation of ocean surface stress",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/wvc_quality_flag",
+          "label": "wind vector cell quality",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/wind_stress_magnitude",
+          "label": "wind stress",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/model_stress_magnitude",
+          "label": "model stress",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/eastward_stress",
+          "label": "wind stress u component",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/northward_stress",
+          "label": "wind stress v component",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/eastward_model_stress",
+          "label": "model stress u component",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/northward_model_stress",
+          "label": "model stress v component",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/bs_distance",
+          "label": "backscatter distance",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/measurement_time",
+          "label": "measurement_time",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/eastward_wind",
+          "label": "eastward_wind",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/northward_wind",
+          "label": "northward_wind",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/wind_speed",
+          "label": "wind_speed",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/wind_to_dir",
+          "label": "wind_to_direction",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/eastward_model_wind",
+          "label": "eastward_wind",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/northward_model_wind",
+          "label": "northward_wind",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/model_wind_speed",
+          "label": "wind_speed",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/model_wind_to_dir",
+          "label": "wind_to_direction",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE/wind",
+          "label": "Wind (speed and direction)",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_ASC_FULL_TIME_SERIE"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-1: Ocean Winds, Daily Descending-node (now -Global)",
+      "children": [
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/wvc_index",
+          "label": "cross track wind vector cell number",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/air_density",
+          "label": "air density at 10 m",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/se_model_speed",
+          "label": "stress equivalent model wind speed at 10 m",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/se_eastward_model_wind",
+          "label": "stress equivalent model wind u component at 10 m",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/se_northward_model_wind",
+          "label": "stress equivalent model wind v component at 10 m",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/stress_divergence",
+          "label": "divergence of ocean surface stress",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/stress_curl",
+          "label": "rotation of ocean surface stress",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/model_stress_divergence",
+          "label": "model divergence of ocean surface stress",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/model_stress_curl",
+          "label": "model rotation of ocean surface stress",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/wvc_quality_flag",
+          "label": "wind vector cell quality",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/wind_stress_magnitude",
+          "label": "wind stress",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/model_stress_magnitude",
+          "label": "model stress",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/eastward_stress",
+          "label": "wind stress u component",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/northward_stress",
+          "label": "wind stress v component",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/eastward_model_stress",
+          "label": "model stress u component",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/northward_model_stress",
+          "label": "model stress v component",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/bs_distance",
+          "label": "backscatter distance",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/measurement_time",
+          "label": "measurement_time",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/eastward_wind",
+          "label": "eastward_wind",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/northward_wind",
+          "label": "northward_wind",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/wind_speed",
+          "label": "wind_speed",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/wind_to_dir",
+          "label": "wind_to_direction",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/eastward_model_wind",
+          "label": "eastward_wind",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/northward_model_wind",
+          "label": "northward_wind",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/model_wind_speed",
+          "label": "wind_speed",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/model_wind_to_dir",
+          "label": "wind_to_direction",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        },
+        {
+          "id": "KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE/wind",
+          "label": "Wind (speed and direction)",
+          "moreinfo": "ID: KNMI-GLO-WIND_L3_METOP-B_12KM-OBS_DES_FULL_TIME_SERIE"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-1: Ocean Winds Climatology (Global)",
+      "children": [
+        {
+          "id": "CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE/wind_speed",
+          "label": "wind_speed",
+          "moreinfo": "ID: CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE/eastward_wind",
+          "label": "eastward_wind",
+          "moreinfo": "ID: CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE/northward_wind",
+          "label": "northward_wind",
+          "moreinfo": "ID: CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE/wind_speed_rms",
+          "label": "wind speed root mean square",
+          "moreinfo": "ID: CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE/eastward_wind_rms",
+          "label": "eastward wind speed root mean square",
+          "moreinfo": "ID: CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE/northward_wind_rms",
+          "label": "northward wind speed root mean square",
+          "moreinfo": "ID: CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE/wind_stress",
+          "label": "wind stress",
+          "moreinfo": "ID: CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE/surface_downward_eastward_stress",
+          "label": "surface_downward_eastward_stress",
+          "moreinfo": "ID: CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE/surface_downward_northward_stress",
+          "label": "surface_downward_northward_stress",
+          "moreinfo": "ID: CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE/wind_stress_rms",
+          "label": "wind stress root mean square",
+          "moreinfo": "ID: CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE/surface_downward_eastward_stress_rms",
+          "label": "eastward wind stress root mean square",
+          "moreinfo": "ID: CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE/surface_downward_northward_stress_rms",
+          "label": "northward wind stress root mean square",
+          "moreinfo": "ID: CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE/sampling_length",
+          "label": "sampling length",
+          "moreinfo": "ID: CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE/land_ice_mask",
+          "label": "flag - 0:ocean - 1:earth/ice",
+          "moreinfo": "ID: CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE/wind",
+          "label": "Wind (speed and direction)",
+          "moreinfo": "ID: CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE/surface_downward_stress",
+          "label": "surface_downward_stress",
+          "moreinfo": "ID: CERSAT-GLO-CLIM_WIND_L4-OBS_FULL_TIME_SERIE"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-2: Reflectance (Brussels, Belgium)",
+      "children": [
+        {
+          "id": "simS2seriesAgriBelgium/blue",
+          "label": "Blue (440 to 510nm)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel2Catalog.html?dataset=simS2seriesAgriBelgium"
+        },
+        {
+          "id": "simS2seriesAgriBelgium/green",
+          "label": "Green (520 to 590nm)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel2Catalog.html?dataset=simS2seriesAgriBelgium"
+        },
+        {
+          "id": "simS2seriesAgriBelgium/red",
+          "label": "Red (630 to 685nm)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel2Catalog.html?dataset=simS2seriesAgriBelgium"
+        },
+        {
+          "id": "simS2seriesAgriBelgium/red-edge",
+          "label": "Red-edge (690 to 730nm)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel2Catalog.html?dataset=simS2seriesAgriBelgium"
+        },
+        {
+          "id": "simS2seriesAgriBelgium/near-infrared",
+          "label": "Near-infrared (760 to 850nm)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel2Catalog.html?dataset=simS2seriesAgriBelgium"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-2: Reflectance (Borova, Ukraine)",
+      "children": [
+        {
+          "id": "simS2seriesAgriUkraine/blue",
+          "label": "Blue (440 to 510nm)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel2Catalog.html?dataset=simS2seriesAgriUkraine"
+        },
+        {
+          "id": "simS2seriesAgriUkraine/green",
+          "label": "Green (520 to 590nm)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel2Catalog.html?dataset=simS2seriesAgriUkraine"
+        },
+        {
+          "id": "simS2seriesAgriUkraine/red",
+          "label": "Red (630 to 685nm)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel2Catalog.html?dataset=simS2seriesAgriUkraine"
+        },
+        {
+          "id": "simS2seriesAgriUkraine/red-edge",
+          "label": "Red-edge (690 to 730nm)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel2Catalog.html?dataset=simS2seriesAgriUkraine"
+        },
+        {
+          "id": "simS2seriesAgriUkraine/near-infrared",
+          "label": "Near-infrared (760 to 850nm)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel2Catalog.html?dataset=simS2seriesAgriUkraine"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-2: Reflectance (Chesapeake Bay, USA)",
+      "children": [
+        {
+          "id": "simS2seriesCoasUSA/blue",
+          "label": "Blue (440 to 510nm)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel2Catalog.html?dataset=simS2seriesCoasUSA"
+        },
+        {
+          "id": "simS2seriesCoasUSA/green",
+          "label": "Green (520 to 590nm)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel2Catalog.html?dataset=simS2seriesCoasUSA"
+        },
+        {
+          "id": "simS2seriesCoasUSA/red",
+          "label": "Red (630 to 685nm)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel2Catalog.html?dataset=simS2seriesCoasUSA"
+        },
+        {
+          "id": "simS2seriesCoasUSA/red-edge",
+          "label": "Red-edge (690 to 730nm)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel2Catalog.html?dataset=simS2seriesCoasUSA"
+        },
+        {
+          "id": "simS2seriesCoasUSA/near-infrared",
+          "label": "Near-infrared (760 to 850nm)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel2Catalog.html?dataset=simS2seriesCoasUSA"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-2: CORINE European Land Cover",
+      "children": [
+        {
+          "id": "simS2seriesCoverEur/coverclass",
+          "label": "Land-cover type",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel2Catalog.html?dataset=simS2seriesCoverEur"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-3: Global Land Cover",
+      "children": [
+        {
+          "id": "simS3seriesCoverGlobal/coverclass",
+          "label": "Land-cover type",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel3Catalog.html?dataset=simS3seriesCoverGlobal"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-3: Global Albedo",
+      "children": [
+        {
+          "id": "simS3seriesAlbedoGlobal/DHR_VIS",
+          "label": "Black-sky albedo VIS",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel3Catalog.html?dataset=simS3seriesAlbedoGlobal"
+        },
+        {
+          "id": "simS3seriesAlbedoGlobal/DHR_NIR",
+          "label": "Black-sky albedo NIR",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel3Catalog.html?dataset=simS3seriesAlbedoGlobal"
+        },
+        {
+          "id": "simS3seriesAlbedoGlobal/DHR_SW",
+          "label": "Black-sky albedo SW",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel3Catalog.html?dataset=simS3seriesAlbedoGlobal"
+        },
+        {
+          "id": "simS3seriesAlbedoGlobal/BHR_VIS",
+          "label": "White-sky albedo VIS",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel3Catalog.html?dataset=simS3seriesAlbedoGlobal"
+        },
+        {
+          "id": "simS3seriesAlbedoGlobal/BHR_NIR",
+          "label": "White-sky albedo NIR",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel3Catalog.html?dataset=simS3seriesAlbedoGlobal"
+        },
+        {
+          "id": "simS3seriesAlbedoGlobal/BHR_SW",
+          "label": "White-sky albedo SW",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel3Catalog.html?dataset=simS3seriesAlbedoGlobal"
+        },
+        {
+          "id": "simS3seriesAlbedoGlobal/DHR_sigmaVIS",
+          "label": "Uncertainity of Black-sky albedo VIS",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel3Catalog.html?dataset=simS3seriesAlbedoGlobal"
+        },
+        {
+          "id": "simS3seriesAlbedoGlobal/DHR_sigmaNIR",
+          "label": "Uncertainity of Black-sky albedo NIR",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel3Catalog.html?dataset=simS3seriesAlbedoGlobal"
+        },
+        {
+          "id": "simS3seriesAlbedoGlobal/DHR_sigmaSW",
+          "label": "Uncertainity of Black-sky albedo SW",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel3Catalog.html?dataset=simS3seriesAlbedoGlobal"
+        },
+        {
+          "id": "simS3seriesAlbedoGlobal/BHR_sigmaVIS",
+          "label": "Uncertainity of White-sky albedo VIS",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel3Catalog.html?dataset=simS3seriesAlbedoGlobal"
+        },
+        {
+          "id": "simS3seriesAlbedoGlobal/BHR_sigmaNIR",
+          "label": "Uncertainity of White-sky albedo NIR",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel3Catalog.html?dataset=simS3seriesAlbedoGlobal"
+        },
+        {
+          "id": "simS3seriesAlbedoGlobal/BHR_sigmaSW",
+          "label": "Uncertainity of White-sky albedo SW",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel3Catalog.html?dataset=simS3seriesAlbedoGlobal"
+        },
+        {
+          "id": "simS3seriesAlbedoGlobal/Weighted_Number_of_Samples",
+          "label": "Weighted Number of Samples",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel3Catalog.html?dataset=simS3seriesAlbedoGlobal"
+        },
+        {
+          "id": "simS3seriesAlbedoGlobal/Relative_Entropy",
+          "label": "Relative Entropy",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel3Catalog.html?dataset=simS3seriesAlbedoGlobal"
+        },
+        {
+          "id": "simS3seriesAlbedoGlobal/Goodness_of_Fit",
+          "label": "Goodness-of-Fit",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel3Catalog.html?dataset=simS3seriesAlbedoGlobal"
+        },
+        {
+          "id": "simS3seriesAlbedoGlobal/Snow_Fraction",
+          "label": "Snow fraction",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel3Catalog.html?dataset=simS3seriesAlbedoGlobal"
+        },
+        {
+          "id": "simS3seriesAlbedoGlobal/Data_Mask",
+          "label": "Data mask",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel3Catalog.html?dataset=simS3seriesAlbedoGlobal"
+        },
+        {
+          "id": "simS3seriesAlbedoGlobal/Solar_Zenith_Angle",
+          "label": "Solar Zenith Angle",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel3Catalog.html?dataset=simS3seriesAlbedoGlobal"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-3: Global Leaf-Area Index",
+      "children": [
+        {
+          "id": "simS3seriesLaiGlobal/lai",
+          "label": "Leaf-area Index",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel3Catalog.html?dataset=simS3seriesLaiGlobal"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-3: Land-surface greenness (Sicily, Italy)",
+      "children": [
+        {
+          "id": "simS3seriesVIsSicilyIT/EVI",
+          "label": "Enhanced Vegetation Index",
+          "moreinfo": "ID: simS3seriesVIsSicilyIT"
+        },
+        {
+          "id": "simS3seriesVIsSicilyIT/NDVI",
+          "label": "Normalized Difference Vegetation Index",
+          "moreinfo": "ID: simS3seriesVIsSicilyIT"
+        },
+        {
+          "id": "simS3seriesVIsSicilyIT/VI_Quality",
+          "label": "Quality greeness indices",
+          "moreinfo": "ID: simS3seriesVIsSicilyIT"
+        },
+        {
+          "id": "simS3seriesVIsSicilyIT/view_zenith_angle",
+          "label": "View zenith angle",
+          "moreinfo": "ID: simS3seriesVIsSicilyIT"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-3: Land-surface Temperature (Sicily, Italy)",
+      "children": [
+        {
+          "id": "simS3seriesLstMaxSicilyIT/tmax_rec",
+          "label": "Land-surface temperature (max)",
+          "moreinfo": "ID: simS3seriesLstMaxSicilyIT"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-3: ARGO/SMOS In-situ Ocean observations (Global, interpolated)",
+      "children": [
+        {
+          "id": "argoSmosSeriesNrt/PSAL",
+          "label": "Salinity",
+          "moreinfo": "http://www.nodc.noaa.gov/argo/overview.htm"
+        },
+        {
+          "id": "argoSmosSeriesNrt/salinity_pct_variance",
+          "label": "Error on salinity (percent of a priori variance)",
+          "moreinfo": "http://www.nodc.noaa.gov/argo/overview.htm"
+        },
+        {
+          "id": "argoSmosSeriesNrt/TEMP",
+          "label": "Temperature",
+          "moreinfo": "http://www.nodc.noaa.gov/argo/overview.htm"
+        },
+        {
+          "id": "argoSmosSeriesNrt/temperature_pct_variance",
+          "label": "Error on temperature (percent of a priori variance)",
+          "moreinfo": "http://www.nodc.noaa.gov/argo/overview.htm"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-3: Chlorophyll-a (West European Seas)",
+      "children": [
+        {
+          "id": "IFREMER-WESTERN_EUROPE-CHL_MODIS_MERIS_L4-RAN-OBS_FULL_TIME_SERIE/CHL",
+          "label": "Chlorophyll-a (sea water)",
+          "moreinfo": "ID: IFREMER-WESTERN_EUROPE-CHL_MODIS_MERIS_L4-RAN-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "IFREMER-WESTERN_EUROPE-CHL_MODIS_MERIS_L4-RAN-OBS_FULL_TIME_SERIE/CHL_anomaly",
+          "label": "chlorophyll-a anomaly",
+          "moreinfo": "ID: IFREMER-WESTERN_EUROPE-CHL_MODIS_MERIS_L4-RAN-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "IFREMER-WESTERN_EUROPE-CHL_MODIS_MERIS_L4-RAN-OBS_FULL_TIME_SERIE/CHL_error",
+          "label": "chl-a standard deviation estimated error",
+          "moreinfo": "ID: IFREMER-WESTERN_EUROPE-CHL_MODIS_MERIS_L4-RAN-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "IFREMER-WESTERN_EUROPE-CHL_MODIS_MERIS_L4-RAN-OBS_FULL_TIME_SERIE/mask",
+          "label": "mask",
+          "moreinfo": "ID: IFREMER-WESTERN_EUROPE-CHL_MODIS_MERIS_L4-RAN-OBS_FULL_TIME_SERIE"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-3: Inorganic Suspend Matter (West European Seas)",
+      "children": [
+        {
+          "id": "IFREMER-WESTERN_EUROPE-ISPM_MODIS_MERIS_L4-RAN-OBS_FULL_TIME_SERIE/SPM",
+          "label": "Particulate inorganic matter (sea water)",
+          "moreinfo": "ID: IFREMER-WESTERN_EUROPE-ISPM_MODIS_MERIS_L4-RAN-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "IFREMER-WESTERN_EUROPE-ISPM_MODIS_MERIS_L4-RAN-OBS_FULL_TIME_SERIE/SPM_anomaly",
+          "label": "Anomaly of inorganic suspended matter",
+          "moreinfo": "ID: IFREMER-WESTERN_EUROPE-ISPM_MODIS_MERIS_L4-RAN-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "IFREMER-WESTERN_EUROPE-ISPM_MODIS_MERIS_L4-RAN-OBS_FULL_TIME_SERIE/SPM_error",
+          "label": "Standard deviation error of inorganic suspended matter",
+          "moreinfo": "ID: IFREMER-WESTERN_EUROPE-ISPM_MODIS_MERIS_L4-RAN-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "IFREMER-WESTERN_EUROPE-ISPM_MODIS_MERIS_L4-RAN-OBS_FULL_TIME_SERIE/mask",
+          "label": "mask",
+          "moreinfo": "ID: IFREMER-WESTERN_EUROPE-ISPM_MODIS_MERIS_L4-RAN-OBS_FULL_TIME_SERIE"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-3: Sea-surface Temperature (European Seas)",
+      "children": [
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/source_of_sst",
+          "label": "SST sensor origin",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/or_latitude",
+          "label": "original latitude of the SST value",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/or_longitude",
+          "label": "original longitude of the SST value",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/or_number_of_pixels",
+          "label": "number of pixels from the L2Ps contributing to the SST value",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/sst_dtime",
+          "label": "time difference from reference time",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/sea_surface_temperature",
+          "label": "Sea-surface temperature",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/diurnal_warming",
+          "label": "Diurnal warming",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/quality_level",
+          "label": "proximity confidence value",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/sses_bias",
+          "label": "SSES bias estimate",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/sses_standard_deviation",
+          "label": "SSES standard deviation",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/bias_to_reference_sst",
+          "label": "bias error derived from reference",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/standard_deviation_to_reference_sst",
+          "label": "standard_deviation_to_reference_sst",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/bias_to_reference_sst_confidence",
+          "label": "bias error confidence value",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/satellite_zenith_angle",
+          "label": "satellite zenith angle",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/solar_zenith_angle",
+          "label": "sun zenith angle",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/sst_true_solar_time",
+          "label": "sst true solar time",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/adjusted_sea_surface_temperature",
+          "label": "Adjusted SST",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/adjusted_standard_deviation_error",
+          "label": "SSES standard deviation error based on confidence flags and adjustement method",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/wind_speed",
+          "label": "10m wind speed",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/wind_speed_dtime_from_sst",
+          "label": "time difference of the wind speed measurement from SST measurement",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/sources_of_wind_speed",
+          "label": "sources of wind speed",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/sea_ice_fraction",
+          "label": "sea_ice_fraction",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/sea_ice_fraction_dtime_from_sst",
+          "label": "time difference of sea ice fraction measurement from SST measurement",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE/sources_of_sea_ice_fraction",
+          "label": "sources of sea ice fraction",
+          "moreinfo": "ID: METEOFRANCE-EUR-SST_L3MULTISENSOR_NRT-OBS_FULL_TIME_SERIE"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-3: Sea-surface Temperature (Arctic Ocean)",
+      "children": [
+        {
+          "id": "METNO-ARC-SST-HR-L4-NRT-OBS_FULL_TIME_SERIE/analysed_sst",
+          "label": "Sea-surface temperature",
+          "moreinfo": "ID: METNO-ARC-SST-HR-L4-NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METNO-ARC-SST-HR-L4-NRT-OBS_FULL_TIME_SERIE/analysis_error",
+          "label": "sea_surface_temperature_error",
+          "moreinfo": "ID: METNO-ARC-SST-HR-L4-NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METNO-ARC-SST-HR-L4-NRT-OBS_FULL_TIME_SERIE/mask",
+          "label": "land sea ice lake bit mask",
+          "moreinfo": "ID: METNO-ARC-SST-HR-L4-NRT-OBS_FULL_TIME_SERIE"
+        },
+        {
+          "id": "METNO-ARC-SST-HR-L4-NRT-OBS_FULL_TIME_SERIE/sea_ice_fraction",
+          "label": "sea_ice_area_fraction",
+          "moreinfo": "ID: METNO-ARC-SST-HR-L4-NRT-OBS_FULL_TIME_SERIE"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-3: Sea Physical Analysis (Now - forecast)",
+      "children": [
+        {
+          "id": "simS3seriesPhyForGlob/temperature",
+          "label": "sea_water_potential_temperature",
+          "moreinfo": "http://catalogue.myocean.eu.org/static/resources/myocean/pum/MYO2-GLO-PUM-001-002-V3.2.pdf"
+        },
+        {
+          "id": "simS3seriesPhyForGlob/salinity",
+          "label": "sea_water_salinity",
+          "moreinfo": "http://catalogue.myocean.eu.org/static/resources/myocean/pum/MYO2-GLO-PUM-001-002-V3.2.pdf"
+        },
+        {
+          "id": "simS3seriesPhyForGlob/u",
+          "label": "eastward_sea_water_velocity",
+          "moreinfo": "http://catalogue.myocean.eu.org/static/resources/myocean/pum/MYO2-GLO-PUM-001-002-V3.2.pdf"
+        },
+        {
+          "id": "simS3seriesPhyForGlob/v",
+          "label": "northward_sea_water_velocity",
+          "moreinfo": "http://catalogue.myocean.eu.org/static/resources/myocean/pum/MYO2-GLO-PUM-001-002-V3.2.pdf"
+        },
+        {
+          "id": "simS3seriesPhyForGlob/ssh",
+          "label": "Sea-surface height (above geoid)",
+          "moreinfo": "http://catalogue.myocean.eu.org/static/resources/myocean/pum/MYO2-GLO-PUM-001-002-V3.2.pdf"
+        },
+        {
+          "id": "simS3seriesPhyForGlob/hice",
+          "label": "sea_ice_thickness",
+          "moreinfo": "http://catalogue.myocean.eu.org/static/resources/myocean/pum/MYO2-GLO-PUM-001-002-V3.2.pdf"
+        },
+        {
+          "id": "simS3seriesPhyForGlob/fice",
+          "label": "sea_ice_area_fraction",
+          "moreinfo": "http://catalogue.myocean.eu.org/static/resources/myocean/pum/MYO2-GLO-PUM-001-002-V3.2.pdf"
+        },
+        {
+          "id": "simS3seriesPhyForGlob/uice",
+          "label": "eastward_sea_ice_velocity",
+          "moreinfo": "http://catalogue.myocean.eu.org/static/resources/myocean/pum/MYO2-GLO-PUM-001-002-V3.2.pdf"
+        },
+        {
+          "id": "simS3seriesPhyForGlob/vice",
+          "label": "northward_sea_ice_velocity",
+          "moreinfo": "http://catalogue.myocean.eu.org/static/resources/myocean/pum/MYO2-GLO-PUM-001-002-V3.2.pdf"
+        },
+        {
+          "id": "simS3seriesPhyForGlob/sea_water_velocity",
+          "label": "sea_water_velocity",
+          "moreinfo": "http://catalogue.myocean.eu.org/static/resources/myocean/pum/MYO2-GLO-PUM-001-002-V3.2.pdf"
+        },
+        {
+          "id": "simS3seriesPhyForGlob/sea_ice_velocity",
+          "label": "sea_ice_velocity",
+          "moreinfo": "http://catalogue.myocean.eu.org/static/resources/myocean/pum/MYO2-GLO-PUM-001-002-V3.2.pdf"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-3: Global Nighttime Lights",
+      "children": [
+        {
+          "id": "simS3seriesNighttimeLightsGlob/brightness",
+          "label": "Nighttime Lights",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel3Catalog.html?dataset=simS3seriesNighttimeLightsGlob"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-4: Ocean Biogeochemistry (North Atlantic)",
+      "children": [
+        {
+          "id": "dataset-topaz4-bio-nat-myoceanv2-be/pp_depth",
+          "label": "Productivity of carbon (Gross primary, sea)",
+          "moreinfo": "ID: dataset-topaz4-bio-nat-myoceanv2-be"
+        },
+        {
+          "id": "dataset-topaz4-bio-nat-myoceanv2-be/chla",
+          "label": "Chlorophyll-a (sea water)",
+          "moreinfo": "ID: dataset-topaz4-bio-nat-myoceanv2-be"
+        },
+        {
+          "id": "dataset-topaz4-bio-nat-myoceanv2-be/attcoef",
+          "label": "Downwelling radiative flux (volume attenuation coefficient, sea)",
+          "moreinfo": "ID: dataset-topaz4-bio-nat-myoceanv2-be"
+        },
+        {
+          "id": "dataset-topaz4-bio-nat-myoceanv2-be/nitrat",
+          "label": "Nitrate (mole concentration in sea water)",
+          "moreinfo": "ID: dataset-topaz4-bio-nat-myoceanv2-be"
+        },
+        {
+          "id": "dataset-topaz4-bio-nat-myoceanv2-be/phosphat",
+          "label": "Phosphate (mole concentration in sea water)",
+          "moreinfo": "ID: dataset-topaz4-bio-nat-myoceanv2-be"
+        },
+        {
+          "id": "dataset-topaz4-bio-nat-myoceanv2-be/pbiomass",
+          "label": "Phytoplankton (mole concentration in sea water, expressed as nitrogen)",
+          "moreinfo": "ID: dataset-topaz4-bio-nat-myoceanv2-be"
+        },
+        {
+          "id": "dataset-topaz4-bio-nat-myoceanv2-be/oxygen",
+          "label": "Oxygen (mole concentration in sea water)",
+          "moreinfo": "ID: dataset-topaz4-bio-nat-myoceanv2-be"
+        },
+        {
+          "id": "dataset-topaz4-bio-nat-myoceanv2-be/model_depth",
+          "label": "Sea-floor depth (below sea level)",
+          "moreinfo": "ID: dataset-topaz4-bio-nat-myoceanv2-be"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-4: Diurnal Reflectance (Sicily, Italy)",
+      "children": [
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/AVE_NIR",
+          "label": "NIR reflectances used as BRDF input (average)",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/AVE_red",
+          "label": "RED reflectances used as BRDF input",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/AVE_SWIR",
+          "label": "SWIR reflectances used as BRDF input",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/GEOP_NIR",
+          "label": "NIR geometric parameter values",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/GEOP_red",
+          "label": "RED geometric parameter values",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/GEOP_SWIR",
+          "label": "SWIR geometric parameter values",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/ISOP_NIR",
+          "label": "NIR isotropic parameter values",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/ISOP_red",
+          "label": "RED isotropic parameter values",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/ISOP_SWIR",
+          "label": "SWIR isotropic parameter values",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/NBAR_NIR",
+          "label": "NIR Normalised BRDF Adjusted Reflectances",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/NBAR_red",
+          "label": "RED Normalised BRDF Adjusted Reflectances",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/NBAR_SWIR",
+          "label": "SWIR Normalised BRDF Adjusted Reflectances",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/NOBS_NIR",
+          "label": "NIR number of acceptable input observations",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/NOBS_red",
+          "label": "RED number of acceptable input observations",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/NOBS_SWIR",
+          "label": "SWIR number of acceptable input observations",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/QUAL_NIR",
+          "label": "NIR quality flag",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/QUAL_red",
+          "label": "RED quality flag",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/QUAL_SWIR",
+          "label": "SWIR quality flag",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/RMSE_NIR",
+          "label": "NIR root mean square error estimates",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/RMSE_red",
+          "label": "RED root mean square error estimates",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/RMSE_SWIR",
+          "label": "SWIR root mean square error estimates",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/VOLP_NIR",
+          "label": "NIR volumetric parameter values",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/VOLP_red",
+          "label": "RED volumetric parameter values",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/VOLP_SWIR",
+          "label": "SWIR volumetric parameter values",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/WDWSA_NIR",
+          "label": "NIR WODWSA white sky albedo (WSA) Weights of Determination (WoDs)",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/WDWSA_red",
+          "label": "RED WODWSA white sky albedo (WSA) Weights of Determination (WoDs)",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/WDWSA_SWIR",
+          "label": "SWIR WODWSA white sky albedo (WSA) Weights of Determination (WoDs)",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/WND45_NIR",
+          "label": "NIR WODN Nadir-45 Weights of Determination",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/WND45_red",
+          "label": "RED WODN Nadir-45 Weights of Determination",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        },
+        {
+          "id": "simS4seriesRefDiurnalSicilyIT/WND45_SWIR",
+          "label": "SWIR WODN Nadir-45 Weights of Determination",
+          "moreinfo": "ID: simS4seriesRefDiurnalSicilyIT"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-4: Diurnal Land-surface temperature (Sicily, Italy)",
+      "children": [
+        {
+          "id": "simS4seriesLstDiurnalSicilyIT/LST",
+          "label": "Land-surface temperature",
+          "moreinfo": "ID: simS4seriesLstDiurnalSicilyIT"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-4: Diurnal Cloud Physical Properties (CPP)",
+      "children": [
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/time_offset",
+          "label": "time_offset",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/lat",
+          "label": "latitude",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/lon",
+          "label": "longitude",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/azidiff",
+          "label": "angle_of_rotation_from_solar_azimuth_to_platform_azimuth",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/cth",
+          "label": "Cloud-top height",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/cldmask",
+          "label": "Cloud-area fraction (status flag)",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/cot",
+          "label": "Cloud Optical-thickness (atmos. due to cloud)",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/cph",
+          "label": "Thermodynamic particle phase (cloud top, status flag)",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/ctt",
+          "label": "Air-temperature (cloud top)",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/cwp",
+          "label": "Cloud condensed water content (atmospheric)",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/dcld",
+          "label": "Thickness of liquid water cloud",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/dcot",
+          "label": "Cloud Optical-thickness (standard error)",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/dcwp",
+          "label": "Cloud condensed water content (standard error)",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/dndv",
+          "label": "number_concentration_of_cloud_liquid_water_particles_in_air_at_liquid_water_cloud_top",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/dreff",
+          "label": "effective_radius_of_cloud_condensed_water_particles_at_cloud_top standard_error",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/precip",
+          "label": "lwe_precipitation_rate",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/precip_ir",
+          "label": "lwe_precipitation_rate",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/qa",
+          "label": "",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/reff",
+          "label": "effective_radius_of_cloud_condensed_water_particles_at_cloud_top",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/satz",
+          "label": "platform_zenith_angle",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/sds",
+          "label": "surface_downwelling_shortwave_flux",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/sds_cs",
+          "label": "surface_downwelling_shortwave_flux_assuming_clear_sky",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/sds_diff",
+          "label": "surface_diffuse_downwelling_shortwave_flux_in_air",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/sds_diff_cs",
+          "label": "surface_diffuse_downwelling_shortwave_flux_in_air_assuming_clear_sky",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        },
+        {
+          "id": "simS4seriesCloudPhysDiurnalMsg/sunz",
+          "label": "solar_zenith_angle",
+          "moreinfo": "http://msgcpp.knmi.nl/mediawiki/index.php/MSG_Cloud_Physical_Properties_%28CPP%29"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-5: Yearly Tropospheric nitrogen dioxide",
+      "children": [
+        {
+          "id": "simS4seriesNo2YearlyGlob/var",
+          "label": "tropospheric_nitrogen_dioxide",
+          "moreinfo": "ID: simS4seriesNo2YearlyGlob"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-5: Historical (2006) European Air quality and Atmospheric Aerosols Experiment (LOTOS EURO)",
+      "children": [
+        {
+          "id": "simS5seriesHisAirQualityEuroExp/o3",
+          "label": "mole_fraction_of_ozone_in_air",
+          "moreinfo": "simS4seriesAirQualityEuro"
+        },
+        {
+          "id": "simS5seriesHisAirQualityEuroExp/no",
+          "label": "mole_fraction_of_nitrogen_monoxide_in_air",
+          "moreinfo": "simS4seriesAirQualityEuro"
+        },
+        {
+          "id": "simS5seriesHisAirQualityEuroExp/no2",
+          "label": "mole_fraction_of_nitrogen_dioxide_in_air",
+          "moreinfo": "simS4seriesAirQualityEuro"
+        },
+        {
+          "id": "simS5seriesHisAirQualityEuroExp/tpm25",
+          "label": "mass_concentration_of_pm2p5_aerosol_in_air",
+          "moreinfo": "simS4seriesAirQualityEuro"
+        },
+        {
+          "id": "simS5seriesHisAirQualityEuroExp/tpm10",
+          "label": "mass_concentration_of_pm10_aerosol_total_in_air",
+          "moreinfo": "simS4seriesAirQualityEuro"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-5: Aerosol optical depth (LAND)",
+      "children": [
+        {
+          "id": "simS5seriesAerosolsLandGlob/tau",
+          "label": "aerosol optical depth",
+          "moreinfo": "simS5seriesAerosolsLandGlob"
+        },
+        {
+          "id": "simS5seriesAerosolsLandGlob/tau_fine",
+          "label": "aerosol optical depth (fine mode)",
+          "moreinfo": "simS5seriesAerosolsLandGlob"
+        },
+        {
+          "id": "simS5seriesAerosolsLandGlob/tau_",
+          "label": "aerosol optical depth (revised)",
+          "moreinfo": "simS5seriesAerosolsLandGlob"
+        },
+        {
+          "id": "simS5seriesAerosolsLandGlob/cloud",
+          "label": "cloud fraction",
+          "moreinfo": "simS5seriesAerosolsLandGlob"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-5: Diurnal Forecasts of Atmospheric composition and Air Quality (Europe)",
+      "children": [
+        {
+          "id": "simS5seriesForAirQualityEuro/o3_conc",
+          "label": "Ozone (O3)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel5Catalog.html?dataset=simS5seriesAirQualityEurope"
+        },
+        {
+          "id": "simS5seriesForAirQualityEuro/no2_conc",
+          "label": "Nitrogen Dioxide (NO2)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel5Catalog.html?dataset=simS5seriesAirQualityEurope"
+        },
+        {
+          "id": "simS5seriesForAirQualityEuro/so2_conc",
+          "label": "Sulphur Dioxide (SO2)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel5Catalog.html?dataset=simS5seriesAirQualityEurope"
+        },
+        {
+          "id": "simS5seriesForAirQualityEuro/co_conc",
+          "label": "Carbon Monoxide (CO)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel5Catalog.html?dataset=simS5seriesAirQualityEurope"
+        },
+        {
+          "id": "simS5seriesForAirQualityEuro/pm10_conc",
+          "label": "PM10 Aerosol (PM10)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel5Catalog.html?dataset=simS5seriesAirQualityEurope"
+        },
+        {
+          "id": "simS5seriesForAirQualityEuro/pm2p5_conc",
+          "label": "PM2p5 Aerosol (PM2.5)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel5Catalog.html?dataset=simS5seriesAirQualityEurope"
+        }
+      ]
+    },
+    {
+      "label": "Sentinel-5: Diurnal Forecasts of Atmospheric composition and Air Quality (Global)",
+      "children": [
+        {
+          "id": "simS5seriesForAirQualityGlob/no2",
+          "label": "Nitrogen dioxide (NO2)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel5Catalog.html?dataset=simS5seriesAirQualityGlobal"
+        },
+        {
+          "id": "simS5seriesForAirQualityGlob/go3",
+          "label": "GEMS Ozone (O3)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel5Catalog.html?dataset=simS5seriesAirQualityGlobal"
+        },
+        {
+          "id": "simS5seriesForAirQualityGlob/uvbed",
+          "label": "UV biologically effective dose (UVI)",
+          "moreinfo": "http://ramani.ujuizi.com/thredds/esaSentinel5Catalog.html?dataset=simS5seriesAirQualityGlobal"
+        }
+      ]
+    },
+    {
+      "label": "Misc Data: Relief of the bedrock surface",
+      "children": [
+        {
+          "id": "miscDatasetScan/etopo01.nc/z",
+          "label": "Elevation",
+          "moreinfo": "http://www.ngdc.noaa.gov/docucomp/page?xml=NOAA/NESDIS/NGDC/MGG/DEM/iso/xml/316.xml&amp;view=getDataView&amp;header=none"
+        }
+      ]
+    },
+    {
+      "label": "Misc Data: Relief of the iced surface",
+      "children": [
+        {
+          "id": "miscDatasetScan/etopo01_ice.nc/z",
+          "label": "Elevation",
+          "moreinfo": "http://www.ngdc.noaa.gov/docucomp/page?xml=NOAA/NESDIS/NGDC/MGG/DEM/iso/xml/316.xml&amp;view=getDataView&amp;header=none"
+        }
+      ]
+    }
+  ]
+}
