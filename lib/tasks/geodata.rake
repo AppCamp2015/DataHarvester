@@ -3,6 +3,38 @@ namespace :geodata do
 		require 'httparty'
 		require 'json'
 		require 'pry'
+
+	def generateDataForCity(city)
+	time = "2009-01-01T00:00:00.000Z"
+	layername = "simS3seriesCoverGlobal/coverclass" 
+	
+	minLat = city['position']['minLat']
+	maxLat = city['position']['maxLat']
+	minLong = city['position']['minLong']
+	maxLong = city['position']['maxLong']
+
+
+	subdivs = 5
+	latExtent = maxLat - minLat
+	longExtent = maxLong - minLong
+
+	lat = minLat
+	long = minLong
+	linestring = ""
+	latStepSize = latExtent  / subdivs
+	for i in 0..subdivs-1 do
+		lat = lat + latStepSize
+		thisLine = "#{minLong}%20#{lat},#{maxLong}%20#{lat},"
+		linestring = linestring + thisLine
+	end
+	return callRamaniforJson(layername, time, linestring[0...-1])
+end
+def callRamaniforJson(layer, time, linestring)
+	response  = HTTParty.get("http://ramani.ujuizi.com/ddl/wms?token=b163d3f52ebf1cf29408464289cf5eea20cda538&package=com.web.ramani&REQUEST=GetTransect&LAYER=#{layer}&CRS=EPSG:4326&ELEVATION=null&TIME=#{time}&LINESTRING=#{linestring},&FORMAT=text/json&COLORSCALERANGE=-140,140&NUMCOLORBANDS=250&LOGSCALE=false&PALETTE=redblue&VERSION=1.1.1")
+	results = JSON.parse(response.body)
+	return results
+end
+
 		
 	desc "Get all layers metadata"
 	task generate_layer_meta: :environment do
@@ -91,7 +123,6 @@ namespace :geodata do
 		def callRamaniforJson(layer, time, linestring)
 				response  = HTTParty.get("http://ramani.ujuizi.com/ddl/wms?token=b163d3f52ebf1cf29408464289cf5eea20cda538&package=com.web.ramani&REQUEST=GetTransect&LAYER=#{layer}&CRS=EPSG:4326&ELEVATION=null&TIME=#{time}&LINESTRING=#{linestring},&FORMAT=text/json&COLORSCALERANGE=-140,140&NUMCOLORBANDS=250&LOGSCALE=false&PALETTE=redblue&VERSION=1.1.1")
 				results = JSON.parse(response.body)
-				binding.pry
 		end
 		time = "2009-01-01T00:00:00.000Z"
 		layername = "simS3seriesCoverGlobal/coverclass" 
@@ -112,12 +143,26 @@ namespace :geodata do
 			thisLine = "#{boxcoords[2]}%20#{lat},#{boxcoords[3]}%20#{lat},"
 			linestring = linestring + thisLine
 		end
-		binding.pry
 		callRamaniforJson(layername, time, linestring[0...-1])
 
+	end
+
+	desc "Generate transect data for a file containing cities"
+	task generate_cities_transects: :environment do
+		citiesFile = JSON.parse(File.read('Germany.json'))
 		
-
-
+		citiesFile.each do |city|
+			begin
+			satellitedata = generateDataForCity(city)
+			city['satellitedata'] = satellitedata
+			puts "Writing data for #{city['City']}"
+			rescue
+			city['satellitedata'] = 'Timed out'
+			end
+		end		
+		f = File.new('citytransects.json',"w")
+		f.write(JSON.pretty_generate(citiesFile))
+		f.close
 	end
 
 end
