@@ -81,7 +81,43 @@ namespace :geodata do
 	end
 
 	desc "Get Timestamps for all layers"
-	task generate_timestamps_all: :environment do
+	task generate_timestamps_all: :environment do 
 
-	end 
+	end
+
+	desc "Generate transects for bounding box for a layer"
+	task generate_transectbb_for_layer: :environment do
+		
+		def callRamaniforJson(layer, time, linestring)
+				response  = HTTParty.get("http://ramani.ujuizi.com/ddl/wms?token=b163d3f52ebf1cf29408464289cf5eea20cda538&package=com.web.ramani&REQUEST=GetTransect&LAYER=#{layer}&CRS=EPSG:4326&ELEVATION=null&TIME=#{time}&LINESTRING=#{linestring},&FORMAT=text/json&COLORSCALERANGE=-140,140&NUMCOLORBANDS=250&LOGSCALE=false&PALETTE=redblue&VERSION=1.1.1")
+				results = JSON.parse(response.body)
+				binding.pry
+		end
+		time = "2009-01-01T00:00:00.000Z"
+		layername = "simS3seriesCoverGlobal/coverclass" 
+		boundingbox = '48.13,48.14,11.56,11.57'
+
+		subdivs = 5
+		boxcoords = boundingbox.split(',')
+		latExtent = boxcoords[1].to_f - boxcoords[0].to_f
+		longExtent = boxcoords[3].to_f - boxcoords[2].to_f
+
+		lat = boxcoords[0].to_f
+		long = boxcoords[2].to_f
+		linestring = ""
+		latStepSize = latExtent  / subdivs
+		for i in 0..subdivs-1 do
+			lat = lat + latStepSize
+			thisLine = [[boxcoords[2],lat],[boxcoords[3],lat]]
+			thisLine = "#{boxcoords[2]}%20#{lat},#{boxcoords[3]}%20#{lat},"
+			linestring = linestring + thisLine
+		end
+		binding.pry
+		callRamaniforJson(layername, time, linestring[0...-1])
+
+		
+
+
+	end
+
 end
