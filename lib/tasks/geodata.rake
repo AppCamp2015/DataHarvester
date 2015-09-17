@@ -42,17 +42,26 @@ namespace :geodata do
 		responseObject = JSON.parse(response.body)
 
 		binding.pry
+
+		def getDayData(layer)
+			begin
+					response = HTTParty.get('http://a.ramani.ujuizi.com/ddl/wms?item=layerDetails&layerName='+layer['id']+'&time=&request=GetMetadata&token=b163d3f52ebf1cf29408464289cf5eea20cda538&package=com.web.ramani')				
+					layer['timedata'] = JSON.parse(response.body)
+					puts "response received for #{layer['id']}"
+			rescue 
+					puts "response timed out for #{layer['id']}"
+			end
+			return layer
+		end
+
+		
+
 		# for each layer description, iterate through each child element to find the layer time data for each child and append the time data
 		# for each child to to object
 		responseObject['children'].each do |layer|
 			# get the children
 			layer['children'].each do |child|
-				begin
-					response = HTTParty.get('http://a.ramani.ujuizi.com/ddl/wms?item=layerDetails&layerName='+child['id']+'&time=&request=GetMetadata&token=b163d3f52ebf1cf29408464289cf5eea20cda538&package=com.web.ramani')				
-					child['timedata'] = JSON.parse(response.body)
-				rescue 
-					retry
-				end
+				child = getDayData child
 			end
 		end
 
@@ -61,6 +70,8 @@ namespace :geodata do
 		f = File.new('daydata.json',"w")
 		f.write(JSON.pretty_generate(responseObject))
 		f.close
+
+
 	end
 
 	desc "Get Timestamps for a layer"
@@ -73,9 +84,4 @@ namespace :geodata do
 	task generate_timestamps_all: :environment do
 
 	end 
-	protected
-
-	def jump_next
-		next
-	end
 end
