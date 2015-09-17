@@ -28,6 +28,7 @@
 		        ,
 		        	new ol.layer.Vector({
 		        		source: vectorSource
+
 		        		
 		        	})
 		        ],
@@ -73,10 +74,91 @@
 		        }
 		      });
 
+		      function executeSplunk(){
+		      	// get the value of the search div
+
+		      	var minlat = $("#minlat").val(); 
+		      	var maxlat = $("#maxlat").val();
+		      	var minlong = $("#maxlong").val();
+		      	var maxlong = $("#maxlong").val();
+
+
+		      	var http = new splunkjs.ProxyHttp("/proxy");
+                var service = new splunkjs.Service(http, {
+                    username: "esa",
+                    password: "esa",
+                });
+
+            service.login(function(err, success) {
+                if (err) {
+                    throw err;
+                }
+
+            console.log("Login was successful: " + success);
+            service.jobs().create("| `co2country_bbox(" + minLat + "," + maxLat + "," + minLon + ","+ maxLon +")`",{
+                status_buckets: 300
+            }, function(err, job){
+                if(err){
+                    console.log(err);
+                    return;
+                }
+                console.log('job created');
+                job.track({}, {
+                    error: function(err) {
+                        console.log('job error: '+err);
+                    },
+                    done: function(job) {
+                        console.log('job done');
+                        job.results({
+                            output_mode: "json_cols"
+                        }, function(err, results){
+                            if(err){
+                                console.log(err);
+                                return;
+                            }
+                            console.log(results);
+                            var chart = new splunkjs.UI.Charting.Chart($("#chart1"), splunkjs.UI.Charting.ChartType.COLUMN, false);
+                            chart.setData(results, {
+                                "chart.stackMode": "stacked"
+                            });
+                            chart.draw();
+                        });
+                    }
+                });
+            });
+		      });
+				};
+
 		    </script>	
 		</div>	
 	</div>
 	<div class="chartcontainer">
+		<div class="row">
+	<button type="button" class="btn btn-default" onclick="executeSplunk()">Call Prodecure</button>
+	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+		<div class="form-group">
+		<label for="input" class="col-sm-2 control-label">MinLat:</label>
+		<div class="col-sm-10">
+			<input type="text" name="" id="minlat" class="form-control" value="" required="required" pattern="" title="">
+		</div>
+		<label for="input" class="col-sm-2 control-label">MaxLat:</label>
+		<div class="col-sm-10">
+			<input type="text" name="" id="maxlat" class="form-control" value="" required="required" pattern="" title="">
+		</div>
+		<label for="input" class="col-sm-2 control-label">MinLong:</label>
+		<div class="col-sm-10">
+			<input type="text" name="" id="minlong" class="form-control" value="" required="required" pattern="" title="">
+		</div>
+		<label for="input" class="col-sm-2 control-label">MaxLong:</label>
+		<div class="col-sm-10">
+			<input type="text" name="" id="maxlong" class="form-control" value="" required="required" pattern="" title="">
+		</div>
+	</div>
+	</div>
+		</div>
+		<div class="row">
+			<div id="querytest"></div>
+		</div>
 		<div class="row">
 			<div id="chart1"></div>
 		</div>
