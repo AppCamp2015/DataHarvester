@@ -57,9 +57,10 @@
         </aside>
         <script>
         	$(document).ready(function() {
- 				$("#queryBar").css("height", $(".fullwidth-container").height());
+        		$("#queryBar").css("height", $(".fullwidth-container").height());
 				$('#queryBar').hide();
-		});
+        	});
+
         </script>
         <script type="text/javascript">
     		$('.createQuery').on('click', function(){
@@ -67,16 +68,14 @@
         	    $('#queryBar').animate({ 'width': '0px' }, 'slow', function(){
         	   	$('#queryBar').hide();
         	   	});
-            	$('#appTitle').animate({ 'padding-left': '0px' }, 'slow');
-            	}
+            }
         	else {
-    			$('#appTitle').animate({ 'padding-left': '215px' }, 'fast'); }
-            	$('#queryBar').animate({ 'width': '210px' }, 'slow', function(){
+    			$('#queryBar').animate({ 'width': '210px' }, 'slow', function(){
         	   	$('#queryBar').show();
         	   	});
-    		});
+    		}
+    	});
 		</script>
-
 
       </div>
 		<div class="col-12">
