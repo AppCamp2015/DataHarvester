@@ -1,3 +1,59 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+html, body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.navbar-default {
+	color: #2D95C2;
+	background-color: #5195C2;
+	margin-bottom: 0px;
+}
+
+.navbar-nav{
+	float: right;
+
+}
+
+#queryBar {
+	width: 300px;
+	height: 100%;
+	position: absolute;
+	z-index: 1;
+	float:left;
+	background-color: #A4DCF5;
+	padding-top: 0px;
+}
+
+
+.filterValues {
+	padding-left: 25px;
+	width: 90%;
+}
+
+.add-remove-Filters{
+	position: relative;
+	float:right;
+	padding-right: 10px;
+}
+
+.timeRange{
+	display:inline-block; 
+	vertical-align:middle;
+	width: 15px;
+	padding-left: 15px;
+}
+
+ #dropdownList{
+	float: right;
+	z-index: 1;
+	position: relative;
+}
+
+#addFilter{
+	float: right;
+}

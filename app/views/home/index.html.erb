@@ -1,16 +1,77 @@
 <nav class="navbar navbar-default" role="navigation">
-	<a class="navbar-brand" href="#">Title</a>
+	<a class="navbar-brand" href="#">Team Name</a>
 	<ul class="nav navbar-nav">
-		<li class="active">
+		<li class="createQuery">
+			<a href="#">Query</a>
+		</li>
+		<li>
 			<a href="#">Home</a>
 		</li>
 		<li>
 			<a href="#">Link</a>
 		</li>
+		
+		<li class="sign-in">
+			<a href="#">Sign in</a>
+		</li>
+		<li class="register">
+			<a href="#">Register</a>
+		</li>
 	</ul>
 </nav>
+	
 <div class="fullwidth-container">
 	<div class="row">
+		 <aside class="span4" id="queryBar"><!-- Sidebar starts here  -->    
+    		<div class="row">
+    		    <div class="widget span4">
+           <div class="filterValues">
+          <form>
+    			<div class="form-group">
+        			<label for="searchName">Search name:</label>
+  					<br><br>
+  					<input id="searchName" type="text" value="">
+    			</div>
+    			<div id="timeSearch" class="form-group">
+        			<label for="searchName">Time Range:</label>
+  					<input type="range" id="Year" class="rangeFilter" value="" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="show" data-slider-handle="round" >
+    			</div>
+    			<br><br>
+    			<div id="adjustFilters" class="dropdown">
+    			<button class="searchButton btn btn-primary" onclick="splunkSearch()">Search</button>
+    				<button id="addFilter" type="button" data-toggle="dropdown" class="dropdown-toggle addFilter btn btn-primary" >+
+    				<span class="caret"></span>
+    				</button>
+     		   <ul class="dropdown-menu" id="dropdownList" aria-labelledby="dropdownMenu1">
+            <li id="Health-Pollution" onclick="selectCategory(id)">Health/ Pollution</li>
+            <li id="Safety-Crime" onclick="selectCategory(id)">Safety/ Crime</li>
+            <li id="Economy" onclick="selectCategory(id)">Economic Factors</li>
+            <li id="Infrastructure" onclick="selectCategory(id)">Infrastructure</li>
+            <li class="divider"></li>
+            <li id="GeneralHealthIndicator" onclick="selectCategory(id)">OverallHealth</li>
+            </ul>
+    </ul>
+</div>
+			</div>	
+			</form>
+		</div>
+		</div>
+        </div>
+        </aside>
+
+        <script type="text/javascript">
+    			$('.createQuery').on('click', function(){
+		        if( $('#queryBar').is(':visible') ) {
+        		    $('#queryBar').animate({ 'width': '0px' }, 'slow', function(){
+                	$('#queryBar').hide();
+            		});
+        		}
+        		else {
+            		$('#queryBar').show();
+           			 $('#queryBar').animate({ 'width': '210px' }, 'slow'); }
+    			});
+	</script>
+      </div>
 		<div class="col-12">
 		    <div id="map" class="map"></div>
 		    <script type="text/javascript">
@@ -129,10 +190,10 @@
             });
 		      });
 				};
-
 		    </script>	
 		</div>	
 	</div>
+	
 	<div class="chartcontainer">
 		<div class="row">
 	<button type="button" class="btn btn-default" onclick="executeSplunk()">Call Prodecure</button>
@@ -164,5 +225,5 @@
 			<div id="chart1"></div>
 		</div>
 	</div>
-
+</div>
 </div>
