@@ -161,7 +161,6 @@ namespace :geodata do
 			outputArray.push(trans)
 		end
 		outputlayername = layername.gsub(/\//	,'-')
-		binding.pry
 		f = File.new("transects/transects-#{outputlayername}-#{city['Country']}-#{city['City']}.json","w")
 		f.write(JSON.pretty_generate(outputArray))
 		f.close
