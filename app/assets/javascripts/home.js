@@ -15,7 +15,6 @@ function splunkSearch(){
     console.log('object for splunk search:', obj); 
 }
 
-
 function selectCategory(id){
     var newLabel = document.createElement('label');
     var newdiv = document.createElement('input');
