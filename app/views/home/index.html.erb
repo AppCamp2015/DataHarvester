@@ -22,11 +22,10 @@
 	
 <div class="fullwidth-container">
 	<div class="row">
-		 <aside class="span4" id="queryBar"><!-- Sidebar starts here  -->    
-    		<div class="row">
-    		    <div class="widget span4">
-           <div class="filterValues">
-          <form>
+		<aside class="span5" id="queryBar"><!-- Sidebar starts here  -->    
+    	 <div class="row">
+          <div class="filterValues">
+            <form>
     			<div class="form-group">
         			<label for="searchName">Search name:</label>
   					<br><br>
@@ -39,38 +38,43 @@
     			<br><br>
     			<div id="adjustFilters" class="dropdown">
     			<button class="searchButton btn btn-primary" onclick="splunkSearch()">Search</button>
-    				<button id="addFilter" type="button" data-toggle="dropdown" class="dropdown-toggle addFilter btn btn-primary" >+
+    			<button id="addFilter" type="button" data-toggle="dropdown" class="dropdown-toggle addFilter btn btn-primary" >+
     				<span class="caret"></span>
-    				</button>
-     		   <ul class="dropdown-menu" id="dropdownList" aria-labelledby="dropdownMenu1">
-            <li id="Health-Pollution" onclick="selectCategory(id)">Health/ Pollution</li>
-            <li id="Safety-Crime" onclick="selectCategory(id)">Safety/ Crime</li>
-            <li id="Economy" onclick="selectCategory(id)">Economic Factors</li>
-            <li id="Infrastructure" onclick="selectCategory(id)">Infrastructure</li>
-            <li class="divider"></li>
-            <li id="GeneralHealthIndicator" onclick="selectCategory(id)">OverallHealth</li>
-            </ul>
-    </ul>
-</div>
-			</div>	
+    			</button>
+     		   		<ul class="dropdown-menu" id="dropdownList" aria-labelledby="dropdownMenu1">
+            			<li id="Health-Pollution" onclick="selectCategory(id)">Health/ Pollution</li>
+			            <li id="Safety-Crime" onclick="selectCategory(id)">Safety/ Crime</li>
+			            <li id="Economy" onclick="selectCategory(id)">Economic Factors</li>
+			            <li id="Infrastructure" onclick="selectCategory(id)">Infrastructure</li>
+			            <li class="divider"></li>
+			            <li id="GeneralHealthIndicator" onclick="selectCategory(id)">OverallHealth</li>
+			        </ul>    	
+			    </div>
+			    <div class="btn-group">
 			</form>
-		</div>
-		</div>
-        </div>
+           </div>
+         </div>
         </aside>
-
+        <script>
+        	$(document).ready(function() {
+ 				$("#queryBar").css("height", $(".fullwidth-container").height());
+				$('#queryBar').hide();
+		});
+        </script>
         <script type="text/javascript">
-    			$('.createQuery').on('click', function(){
-		        if( $('#queryBar').is(':visible') ) {
-        		    $('#queryBar').animate({ 'width': '0px' }, 'slow', function(){
-                	$('#queryBar').hide();
-            		});
-        		}
-        		else {
-            		$('#queryBar').show();
-           			 $('#queryBar').animate({ 'width': '210px' }, 'slow'); }
-    			});
-	</script>
+    		$('.createQuery').on('click', function(){
+		     if( $('#queryBar').is(':visible') ) {
+        	    $('#queryBar').animate({ 'width': '0px' }, 'slow', function(){
+               	$('#queryBar').hide();
+            	});
+        	}
+        	else {
+            	$('#queryBar').show();
+           		$('#queryBar').animate({ 'width': '210px' }, 'slow'); }
+    		});
+		</script>
+
+
       </div>
 		<div class="col-12">
 		    <div id="map" class="map"></div>

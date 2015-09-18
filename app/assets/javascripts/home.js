@@ -26,6 +26,7 @@ function selectCategory(id){
     newdiv.setAttribute('max', "100");
     newdiv.setAttribute('value', "");
     newLabel.innerHTML = id;
+    newLabel.setAttribute('id', id+"range-Label");
     document.getElementById('timeSearch').appendChild(newLabel);
     document.getElementById('timeSearch').appendChild(newdiv);
     document.getElementById(id).remove(); 
