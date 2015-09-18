@@ -3,6 +3,7 @@ namespace :geodata do
 		require 'httparty'
 		require 'json'
 		require 'pry'
+		require 'active_support/core_ext'
 
 	def request_nearest_time_in(requestLayers)
 		# finds the valid dates between the daterange 
@@ -152,6 +153,50 @@ namespace :geodata do
 		f.close
 	end
 
+	def generateDataForCityLayerTime(city,time,layer,artificialtime)
+		layername = layer 
+		
+		minLat = city['position']['minLat']
+		maxLat = city['position']['maxLat']
+		minLong = city['position']['minLong']
+		maxLong = city['position']['maxLong']
+
+		subdivs = 5
+		latExtent = maxLat - minLat
+		longExtent = maxLong - minLong
+
+		lat = minLat
+		long = minLong
+		linestring = ""
+		latStepSize = latExtent  / subdivs
+		for i in 0..subdivs-1 do
+			lat = lat + latStepSize
+			thisLine = "#{minLong}%20#{lat},#{maxLong}%20#{lat},"
+			linestring = linestring + thisLine
+		end
+		responseData = callRamaniforJson(layername, time, linestring[0...-1])
+		outputArray = []
+		if responseData == "Timed out"
+			return
+		end
+
+		timecounter = artificialtime
+		responseData['transect']['transectData'].each do |trans|
+			trans['lon'] = trans['location'].split(" ")[0]
+			trans['lat'] = trans['location'].split(" ")[1]
+			trans['city'] = city['City']
+			trans['time'] = (DateTime::parse(time) + timecounter.seconds).to_s
+			trans['layer'] = layername
+			outputArray.push(trans)
+			timecounter += 1
+		end
+		outputlayername = layername.gsub(/\//	,'-')
+		f = File.new("transects/transects-#{outputlayername}-#{city['Country']}-#{city['City']}.json","w")
+		f.write(JSON.pretty_generate(outputArray))
+		f.close
+		return timecounter
+	end
+
 def callRamaniforJson(layer, time, linestring)
 	
 	timeout = false
@@ -278,11 +323,12 @@ end
 
 		# layers = JSON.parse(File.read(layersfile))
 		# cities = JSON.parse(File.read(citiesfile))
+		timecounter = 0
 		cities = JSON.parse(File.read('europecities.json'))
 		cities.each do |city|
 			timeLayerObject.each do |timelayer|
 				puts "Generating Data for #{city['City']}"
-				generateDataForCityLayerTime(city,timelayer['timedata']['nearestTimeIso'],timelayer['id'])
+				timecounter =  generateDataForCityLayerTime(city,timelayer['timedata']['nearestTimeIso'],timelayer['id'],timecounter)
 			end
 		end
 
