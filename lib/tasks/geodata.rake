@@ -82,7 +82,7 @@ namespace :geodata do
 			trans['layer'] = layername
 			outputArray.push(trans)
 		end
-		f = File.new("transects/transects-#{city['Country']}-#{city['City']}.json","w")
+		f = File.new("newtransects/transects-#{city['Country']}-#{city['City']}.json","w")
 		f.write(JSON.pretty_generate(outputArray))
 		f.close
 	end
@@ -206,7 +206,11 @@ def callRamaniforJson(layer, time, linestring)
 		timeout = true	
 	end
 	if timeout == false
+		begin
 		results = JSON.parse(response.body)
+		rescue
+		results = "JSON parse error for #{layer}" 	
+		end 
 	else
 		results = "Timed out"
 	end
