@@ -148,7 +148,7 @@ namespace :geodata do
 			outputArray.push(trans)
 		end
 		outputlayername = layername.gsub(/\//	,'-')
-		f = File.new("transects/transects-#{outputlayername}-#{city['Country']}-#{city['City']}.json","w")
+		f = File.new("newtransects/transects-#{outputlayername}-#{city['Country']}-#{city['City']}.json","w")
 		f.write(JSON.pretty_generate(outputArray))
 		f.close
 	end
@@ -191,7 +191,7 @@ namespace :geodata do
 			timecounter += 1
 		end
 		outputlayername = layername.gsub(/\//	,'-')
-		f = File.new("transects/transects-#{outputlayername}-#{city['Country']}-#{city['City']}.json","w")
+		f = File.new("newtransects/transects-#{outputlayername}-#{city['Country']}-#{city['City']}.json","w")
 		f.write(JSON.pretty_generate(outputArray))
 		f.close
 		return timecounter
