@@ -9,9 +9,22 @@ html, body {
 }
 
 .navbar-default {
+	width: 100%;
 	color: #2D95C2;
 	background-color: #5195C2;
 	margin-bottom: 0px;
+	box-shadow:3px 3px 15px #383138;
+	position: absolute;
+	z-index:1;
+
+}
+
+.navbar-default .navbar-brand {
+	color:white;
+}
+
+.navbar-default .navbar-nav>li>a{
+	color: white;
 }
 
 .navbar-nav{
