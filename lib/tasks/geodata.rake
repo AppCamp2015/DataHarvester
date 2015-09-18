@@ -155,6 +155,8 @@ namespace :geodata do
 			return
 		end
 		responseData['transect']['transectData'].each do |trans|
+			trans['lon'] = trans['location'].split(" ")[0]
+			trans['lat'] = trans['location'].split(" ")[1]
 			trans['city'] = city['City']
 			trans['time'] = time
 			trans['layer'] = layername
