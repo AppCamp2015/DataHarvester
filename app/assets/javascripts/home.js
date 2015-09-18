@@ -1,4 +1,5 @@
 function splunkSearch(){
+    
     var obj= {};
     var objects = $('.rangeFilter');
 
@@ -17,16 +18,19 @@ function splunkSearch(){
 
 function selectCategory(id){
     var newLabel = document.createElement('label');
-    var newdiv = document.createElement('input');
-    newdiv.setAttribute('class',"rangeFilter");
-    newdiv.setAttribute('type',"range");
-    newdiv.setAttribute('id',id + "range");
-    newdiv.setAttribute('min', "0");
-    newdiv.setAttribute('max', "100");
-    newdiv.setAttribute('value', "");
+    var newRangeFilter = document.createElement('input');
+    newRangeFilter.setAttribute('class',"rangeFilter");
+    newRangeFilter.setAttribute('type',"range");
+    newRangeFilter.setAttribute('id',id + "range");
+    newRangeFilter.setAttribute('min', "0");
+    newRangeFilter.setAttribute('max', "100");
+    newRangeFilter.setAttribute('value', "");
+    newRangeFilter.setAttribute('onchange', "splunkSearch()");
     newLabel.innerHTML = id;
     newLabel.setAttribute('id', id+"range-Label");
+    newLabel.setAttribute('class',"rangeFilterLabel");
     document.getElementById('timeSearch').appendChild(newLabel);
-    document.getElementById('timeSearch').appendChild(newdiv);
+    document.getElementById('timeSearch').appendChild(newRangeFilter);
     document.getElementById(id).remove(); 
 }
+

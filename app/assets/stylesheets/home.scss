@@ -10,21 +10,27 @@ html, body {
 
 .navbar-default {
 	width: 100%;
-	color: #2D95C2;
+	height: 15%;
 	background-color: #5195C2;
 	margin-bottom: 0px;
 	box-shadow:3px 3px 15px #383138;
 	position: absolute;
 	z-index:1;
-
+	font-family: helvetica;
 }
 
 .navbar-default .navbar-brand {
 	color:white;
+    margin-top: 15px;
+    font-size: 20px;
+    font-family: verdana, arial, helvetica, sans-serif;
 }
 
 .navbar-default .navbar-nav>li>a{
 	color: white;
+    margin-top: 15px;
+    font-size: 20px;
+    font-family: verdana, arial, helvetica, sans-serif;
 }
 
 .navbar-nav{
@@ -40,6 +46,34 @@ html, body {
 	padding-top: 0px;
 }
 
+.SearchLabel{
+	padding-top: 25px;
+    padding-bottom: 10px;
+    position: absolute;
+    left: 25%;
+}
+
+.SearchInput{
+	margin-top: 20px;
+    position: relative;
+    left: 12px;
+    height: 20px;
+    box-shadow: 3px 3px #5195C2;
+    border-radius: 5px;
+    border: none;
+}
+
+.rangeFilterLabel {
+	position: relative;
+    left: 20%;
+}
+
+.rangeFilter {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    margin-right: auto;
+ 	margin-left: auto;   
+}
 
 .filterValues {
 	padding-left: 25px;

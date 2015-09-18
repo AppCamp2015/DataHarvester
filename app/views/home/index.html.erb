@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default" role="navigation">
-	<a class="navbar-brand" href="#">Team Name</a>
+	<a class="navbar-brand" id="appTitle" href="#">gQuery</a>
 	<ul class="nav navbar-nav">
 		<li class="createQuery">
 			<a href="#">Query</a>
@@ -28,13 +28,13 @@
           <div class="filterValues">
             <form>
     			<div class="form-group">
-        			<label for="searchName">Search name:</label>
+        			<label for="searchName" class="SearchLabel">Search name:</label>
   					<br><br>
-  					<input id="searchName" type="text" value="">
+  					<input id="searchName" class="SearchInput" type="text" value="">
     			</div>
     			<div id="timeSearch" class="form-group">
-        			<label for="searchName">Time Range:</label>
-  					<input type="range" id="Year" class="rangeFilter" value="" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="show" data-slider-handle="round" >
+        			<label for="timeRange" class="rangeFilterLabel">Time Range:</label>
+  					<input type="range" id="Year" class="rangeFilter" value="" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5" onchange="splunkSearch()" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="show" data-slider-handle="round" >
     			</div>
     			<br><br>
     			<div id="adjustFilters" class="dropdown">
@@ -65,12 +65,15 @@
     		$('.createQuery').on('click', function(){
 		     if( $('#queryBar').is(':visible') ) {
         	    $('#queryBar').animate({ 'width': '0px' }, 'slow', function(){
-               	$('#queryBar').hide();
-            	});
-        	}
+        	   	$('#queryBar').hide();
+        	   	});
+            	$('#appTitle').animate({ 'padding-left': '0px' }, 'slow');
+            	}
         	else {
-            	$('#queryBar').show();
-           		$('#queryBar').animate({ 'width': '210px' }, 'slow'); }
+    			$('#appTitle').animate({ 'padding-left': '215px' }, 'fast'); }
+            	$('#queryBar').animate({ 'width': '210px' }, 'slow', function(){
+        	   	$('#queryBar').show();
+        	   	});
     		});
 		</script>
 
