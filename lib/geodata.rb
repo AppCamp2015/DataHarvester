@@ -123,3 +123,32 @@ namespace :geodata do
 	end
 
 end
+
+
+
+
+module Geodata
+	module ClassMethods
+		def getDayData(layer)
+			begin
+					response = HTTParty.get('http://a.ramani.ujuizi.com/ddl/wms?item=layerDetails&layerName='+layer['id']+'&time=&request=GetMetadata&token=b163d3f52ebf1cf29408464289cf5eea20cda538&package=com.web.ramani')				
+					layer['timedata'] = JSON.parse(response.body)
+					puts "response received for #{layer['id']}"
+			rescue 
+					puts "response timed out for #{layer['id']}"
+			end
+			return layer
+		end		
+	end
+	
+	module InstanceMethods
+		
+	end
+	
+	def self.included(receiver)
+		receiver.extend         ClassMethods
+		receiver.send :include, InstanceMethods
+	end
+end
+	
+	

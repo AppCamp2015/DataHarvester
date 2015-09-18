@@ -7,9 +7,6 @@ namespace :geodata do
 	def request_nearest_time_in(requestLayers)
 		# finds the valid dates between the daterange 
 		puts "Generating layer metadata"
-		# layers = getMetaData()
-		# requiredLayers = layers['children'].select {|child| child.include? requestlayers}
-		# requestLayers.include? layers['children'].first['children'].first['id']
 
 		timedata = []
 
@@ -19,19 +16,6 @@ namespace :geodata do
 					returnvalue['timedata'] = getDayDataID layer
 					timedata.push(returnvalue)
 		end
-
-		# layers['children'].each do |layer|
-		# 	# get the children
-		# 	layer['children'].each do |child|
-		# 		if requestLayers.include? child['id']
-		# 			binding.pry
-		# 			returnvalue ={}
-		# 			returnvalue['id'] = child['id']
-		# 			returnvalue['timedata'] = getDayData child
-		# 			timedata.push(returnvalue)
-		# 		end
-		# 	end
-		# end
 		return timedata
 	end
 
@@ -279,9 +263,6 @@ end
 			city['satellitedata'] = 'Timed out'
 			end
 		end		
-		# f = File.new('italycitytransects.json',"w")
-		# f.write(JSON.pretty_generate(citiesFile))
-		# f.close
 		puts "Success"
 	end
  
