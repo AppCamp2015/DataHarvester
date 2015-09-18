@@ -102,6 +102,19 @@
 		      // a normal select interaction to handle click
 		      var select = new ol.interaction.Select();
 		      map.addInteraction(select);
+		      map.on('moveend',(function(){
+		      	
+
+		      	var view = map.getView();
+		      	var extent = view.calculateExtent(map.getSize());
+		      	var bottomLeft = ol.proj.toLonLat([extent[0],extent[1]]);
+		      	var topRight  = ol.proj.toLonLat([extent[2],extent[3]]);
+		      	var bbox = bottomLeft.concat(topRight);
+		      	console.log(bbox);
+		      	executeSplunk(bbox);
+
+
+		      }))
 
 		      var selectedFeatures = select.getFeatures();
 
@@ -135,13 +148,13 @@
 		        }
 		      });
 
-		      function executeSplunk(){
+		      function executeSplunk(bbox){
 		      	// get the value of the search div
 
-		      	var minlat = $("#minlat").val(); 
-		      	var maxlat = $("#maxlat").val();
-		      	var minlong = $("#minlong").val();
-		      	var maxlong = $("#maxlong").val();
+		      	var maxlat = bbox[2];
+		      	var minlat = bbox[0]; 
+		      	var minlong = bbox[1];
+		      	var maxlong = bbox[3];
 
 
 		      	var http = new splunkjs.ProxyHttp("/proxy");
