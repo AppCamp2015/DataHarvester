@@ -296,7 +296,7 @@ end
 
 		# layers = JSON.parse(File.read(layersfile))
 		# cities = JSON.parse(File.read(citiesfile))
-		cities = JSON.parse(File.read('Germany.json'))
+		cities = JSON.parse(File.read('europecities.json'))
 		cities.each do |city|
 			timeLayerObject.each do |timelayer|
 				puts "Generating Data for #{city['City']}"
