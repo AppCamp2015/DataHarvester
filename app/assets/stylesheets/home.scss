@@ -29,16 +29,13 @@ html, body {
 	padding-top: 0px;
 }
 
-.map{
-	padding-top: 0px; 
-}
 
 .filterValues {
 	padding-left: 25px;
 	width: 90%;
 }
 
-.adjustFilters{
+.add-remove-Filters{
 	position: relative;
 	float:right;
 	padding-right: 10px;
@@ -51,13 +48,12 @@ html, body {
 	padding-left: 15px;
 }
 
-input[type="range"]:before {
-	padding-right: 15px;
-	margin-right: 10px;
-    content: attr(min);
+ #dropdownList{
+	float: right;
+	z-index: 1;
+	position: relative;
 }
 
-input[type="range"]:after {
-    padding-left: 15px;
-    content: attr(max);
+#addFilter{
+	float: right;
 }
