@@ -7,23 +7,50 @@ namespace :geodata do
 	def request_nearest_time_in(requestLayers)
 		# finds the valid dates between the daterange 
 		puts "Generating layer metadata"
-		layers = getMetaData()
-		binding.pry
-		requiredLayers = layers['children'].select {|child| child.include? requestlayers}
+		# layers = getMetaData()
+		# requiredLayers = layers['children'].select {|child| child.include? requestlayers}
+		# requestLayers.include? layers['children'].first['children'].first['id']
 
-		layers['children'].each do |layer|
-			# get the children
-			layer['children'].each do |child|
-				child = getDayData child
-			end
+		timedata = []
+
+		requestLayers.each do |layer|
+					returnvalue ={}
+					returnvalue['id'] = layer
+					returnvalue['timedata'] = getDayDataID layer
+					timedata.push(returnvalue)
 		end
-		binding.pry
 
+		# layers['children'].each do |layer|
+		# 	# get the children
+		# 	layer['children'].each do |child|
+		# 		if requestLayers.include? child['id']
+		# 			binding.pry
+		# 			returnvalue ={}
+		# 			returnvalue['id'] = child['id']
+		# 			returnvalue['timedata'] = getDayData child
+		# 			timedata.push(returnvalue)
+		# 		end
+		# 	end
+		# end
+		return timedata
 	end
+
+	def getDayDataID(layerid)
+		begin
+				response = HTTParty.get('http://ramani.ujuizi.com/ddl/wms?item=layerDetails&layerName='+layerid+'&time=&request=GetMetadata&token=b163d3f52ebf1cf29408464289cf5eea20cda538&package=com.web.ramani')				
+				layer = JSON.parse(response.body)
+				puts "response received for #{layerid}"
+		rescue 
+				puts "response timed out for #{layerid}"
+		end
+		return layer
+	end
+
+
 
 	def getDayData(layer)
 		begin
-				response = HTTParty.get('http://a.ramani.ujuizi.com/ddl/wms?item=layerDetails&layerName='+layer['id']+'&time=&request=GetMetadata&token=b163d3f52ebf1cf29408464289cf5eea20cda538&package=com.web.ramani')				
+				response = HTTParty.get('http://ramani.ujuizi.com/ddl/wms?item=layerDetails&layerName='+layer['id']+'&time=&request=GetMetadata&token=b163d3f52ebf1cf29408464289cf5eea20cda538&package=com.web.ramani')				
 				layer['timedata'] = JSON.parse(response.body)
 				puts "response received for #{layer['id']}"
 		rescue 
@@ -33,7 +60,7 @@ namespace :geodata do
 	end
 
 	def getMetaData
-		response = HTTParty.get('http://a.ramani.ujuizi.com/ddl/wms?item=menu&menu=&request=GetMetadata&token=null')
+		response = HTTParty.get('http://ramani.ujuizi.com/ddl/wms?item=menu&menu=&request=GetMetadata&token=null')
 		responseObject = JSON.parse(response.body)
 		return responseObject
 	end
@@ -109,7 +136,6 @@ namespace :geodata do
 		minLong = city['position']['minLong']
 		maxLong = city['position']['maxLong']
 
-
 		subdivs = 5
 		latExtent = maxLat - minLat
 		longExtent = maxLong - minLong
@@ -125,26 +151,35 @@ namespace :geodata do
 		end
 		responseData = callRamaniforJson(layername, time, linestring[0...-1])
 		outputArray = []
-
+		if responseData == "Timed out"
+			return
+		end
 		responseData['transect']['transectData'].each do |trans|
 			trans['city'] = city['City']
 			trans['time'] = time
 			trans['layer'] = layername
 			outputArray.push(trans)
 		end
-		f = File.new("transects/transects-#{layer}-#{time}-#{city['Country']}-#{city['City']}.json","w")
+		outputlayername = layername.gsub(/\//	,'-')
+		binding.pry
+		f = File.new("transects/transects-#{outputlayername}-#{city['Country']}-#{city['City']}.json","w")
 		f.write(JSON.pretty_generate(outputArray))
 		f.close
 	end
 
 def callRamaniforJson(layer, time, linestring)
 	
+	timeout = false
 	begin
-		response  = HTTParty.get("http://ramani.ujuizi.com/ddl/wms?token=b163d3f52ebf1cf29408464289cf5eea20cda538&package=com.web.ramani&REQUEST=GetTransect&LAYER=#{layer}&CRS=EPSG:4326&ELEVATION=null&TIME=#{time}&LINESTRING=#{linestring},&FORMAT=text/json&COLORSCALERANGE=-140,140&NUMCOLORBANDS=250&LOGSCALE=false&PALETTE=redblue&VERSION=1.1.1")
+		response  = HTTParty.get("http://ramani.ujuizi.com/ddl/wms?token=b163d3f52ebf1cf29408464289cf5eea20cda538&package=com.web.ramani&REQUEST=GetTransect&LAYER=#{layer}&CRS=EPSG:4326&TIME=#{time}&LINESTRING=#{linestring},&FORMAT=text/json&COLORSCALERANGE=-140,140&NUMCOLORBANDS=250&LOGSCALE=false&PALETTE=redblue&VERSION=1.1.1")
 	rescue
-		response = "Request Timed out"	
+		timeout = true	
 	end
-	results = JSON.parse(response.body)
+	if timeout == false
+		results = JSON.parse(response.body)
+	else
+		results = "Timed out"
+	end
 	return results
 end
 
@@ -158,7 +193,6 @@ end
 
 		responseObject = JSON.parse(response.body)
 
-		binding.pry
 
 		f = File.new('layermeta.json',"w")
 		f.write(JSON.pretty_generate(responseObject))
@@ -195,7 +229,6 @@ end
 		end
 
 		# additionally for each child, find the available times for each layer
-		binding.pry
 		f = File.new('daydata.json',"w")
 		f.write(JSON.pretty_generate(responseObject))
 		f.close
@@ -261,13 +294,13 @@ end
 		reqdlayers = ["simS5seriesForAirQualityEuro/no2_conc","simS5seriesForAirQualityEuro/o3_conc","simS5seriesForAirQualityEuro/so2_conc","simS3seriesLaiGlobal/lai","simS3seriesCoverGlobal/coverclass","simS3seriesNighttimeLightsGlob/brightness"]
 		timeLayerObject = request_nearest_time_in(reqdlayers)
 
-
-		layers = JSON.parse(File.read(layersfile))
-		cities = JSON.parse(File.read(citiesfile))
-
+		# layers = JSON.parse(File.read(layersfile))
+		# cities = JSON.parse(File.read(citiesfile))
+		cities = JSON.parse(File.read('Germany.json'))
 		cities.each do |city|
 			timeLayerObject.each do |timelayer|
-				generateDataForCityLayerTime(city[:city],timelayer[:layer],timelayer[:time])
+				puts "Generating Data for #{city['City']}"
+				generateDataForCityLayerTime(city,timelayer['timedata']['nearestTimeIso'],timelayer['id'])
 			end
 		end
 
