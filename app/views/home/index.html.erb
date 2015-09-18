@@ -109,6 +109,8 @@
 		      	var extent = view.calculateExtent(map.getSize());
 		      	var bottomLeft = ol.proj.toLonLat([extent[0],extent[1]]);
 		      	var topRight  = ol.proj.toLonLat([extent[2],extent[3]]);
+		      	console.log(bottomLeft);
+		      	console.log(topRight);
 		      	var bbox = bottomLeft.concat(topRight);
 		      	console.log(bbox);
 		      	executeSplunk(bbox);
@@ -151,10 +153,10 @@
 		      function executeSplunk(bbox){
 		      	// get the value of the search div
 
-		      	var maxlat = bbox[2];
-		      	var minlat = bbox[0]; 
-		      	var minlong = bbox[1];
-		      	var maxlong = bbox[3];
+		      	var maxlat = bbox[3];
+		      	var minlat = bbox[1]; 
+		      	var minlong = bbox[0];
+		      	var maxlong = bbox[2];
 
 
 		      	var http = new splunkjs.ProxyHttp("/proxy");
