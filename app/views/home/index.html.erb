@@ -156,8 +156,8 @@
                 }
 
             console.log("Login was successful: " + success);
-		console.log("`co2countrybbox(" + minlat + "," + maxlat + "," + minlong + ","+ maxlong +")`");
-            service.jobs().create(" `co2countrybbox(" + minlat + "," + maxlat + "," + minlong + ","+ maxlong +")`",{
+		console.log("`pollution_chart(" + minlat + "," + maxlat + "," + minlong + ","+ maxlong +",0,1)`");
+            service.jobs().create(" `pollution_chart(" + minlat + "," + maxlat + "," + minlong + ","+ maxlong +",0,1)`",{
                 status_buckets: 300
             }, function(err, job){
                 if(err){
