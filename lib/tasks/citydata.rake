@@ -10,7 +10,7 @@ namespace :citydata do
 
 		latitude = cityObject["Latitude"].to_f
 		longitude = cityObject["Longitude"].to_f
-		roughFactor = 0.005
+		roughFactor = 0.2
 		minLat = latitude - roughFactor
 		maxLat = latitude + roughFactor
 		minLong = longitude - roughFactor
@@ -68,7 +68,7 @@ namespace :citydata do
 
 		latitude = cityObject["Latitude"].to_f
 		longitude = cityObject["Longitude"].to_f
-		roughFactor = 0.005
+		roughFactor = 0.2
 		minLat = latitude - roughFactor
 		maxLat = latitude + roughFactor
 		minLong = longitude - roughFactor
