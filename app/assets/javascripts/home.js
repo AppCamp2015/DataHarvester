@@ -14,6 +14,7 @@ $('document').ready(function() {
     addSlider($('#slider-range-crime'), $('#crimeRateValue'));
     addSlider($('#slider-range-urbanness'), $('#urbannessRateValue'));
     addSlider($('#slider-range-greenness'), $('#greennessRateValue'));
+    splunkMacros.push(new cityListMacro());
     executeSplunk();
 });
 
@@ -80,7 +81,8 @@ function loginToSplunk() {
     });
     service.login(function(err, success) {
         if (err) {
-            throw err;
+            alert(err);
+            return;
         }
         console.log("Login was successful: " + success);
         splunklogin = true;
@@ -92,14 +94,13 @@ function handleSplunkJob(macroDef) {
 
     var search = macroDef.queryString;
     var cancelled = false;
-
     service.oneshotSearch(
-        search, {output_mode:"json_cols"},
+        search, {},
         function(err, results) {
             if (cancelled) {
                 return
             };
-		if(err){console.log(err)};
+            if(err){console.log(err);}
             macroDef.applyResults(results, err);
         }
     );
