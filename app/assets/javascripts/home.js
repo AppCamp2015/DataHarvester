@@ -96,12 +96,16 @@ function handleSplunkJob(macroDef) {
     var search = macroDef.queryString;
     var cancelled = false;
     service.oneshotSearch(
-        search, {output_mode : "json_cols"},
+        search, {
+            output_mode: "json_cols"
+        },
         function(err, results) {
             if (cancelled) {
                 return
             };
-            if(err){console.log(err);}
+            if (err) {
+                console.log(err);
+            }
             macroDef.applyResults(results, err);
         }
     );
@@ -244,8 +248,8 @@ function pollutionChartMacro() {
             $("#pollutionchartloading").hide();
             chart.setData(results, chartMode);
             chart.draw();
-        }, function(){
-            console.log("show loading indicator for "+searchString());
+        }, function() {
+            console.log("show loading indicator for " + searchString());
             $("#pollutionchartloading").show();
         });
     }
@@ -266,8 +270,8 @@ function healthChartMacro() {
             $("#healthchartloading").hide();
             chart.setData(results, chartMode);
             chart.draw();
-        }, function(){
-            console.log("show loading indicator for "+searchString());
+        }, function() {
+            console.log("show loading indicator for " + searchString());
             $("#healthchartloading").show();
         });
     }
@@ -288,9 +292,9 @@ function crimeChartMacro() {
             $("#crimechartloading").hide();
             chart.setData(results, chartMode);
             chart.draw();
-        }, function(){
+        }, function() {
             $("#crimechartloading").show();
-            console.log("show loading indicator for "+searchString());
+            console.log("show loading indicator for " + searchString());
         });
     }
 
@@ -311,9 +315,9 @@ function urbanChartMacro() {
             $("#urbanchartloading").hide();
             chart.setData(results, chartMode);
             chart.draw();
-        }, function(){
+        }, function() {
             $("#urbanchartloading").show();
-            console.log("show loading indicator for "+searchString());
+            console.log("show loading indicator for " + searchString());
         });
     }
 
@@ -333,8 +337,8 @@ function greenChartMacro() {
         return new macroDef(searchString(), function(results, err) {
             chart.setData(results, chartMode);
             chart.draw();
-        }, function(){
-            console.log("show loading indicator for "+searchString());
+        }, function() {
+            console.log("show loading indicator for " + searchString());
         });
     }
 };
@@ -348,7 +352,12 @@ function cityListMacro() {
     };
     this.getMacroDef = function() {
         // this regenerates the searchstring based on current values e.g call the macro function once 
-        return new macroDef(searchString(), function(results, err) {}, function(results, err) {});
+        return new macroDef(searchString(), function(results, err) {
+                console.log(results);
+            },
+            function(results, err) {
+
+            });
     }
 }
 
