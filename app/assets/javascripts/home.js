@@ -318,7 +318,8 @@ function urbanChartMacro() {
 function greenChartMacro() {
     var chart = new splunkjs.UI.Charting.Chart($("#greenchart"), splunkjs.UI.Charting.ChartType.PIE, false);
     var chartMode = {
-        "chart.stackMode": "stacked"
+        "axisTitleX.text": "Years",
+        "axisY2.enabled": 0
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
