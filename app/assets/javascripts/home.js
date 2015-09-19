@@ -64,7 +64,6 @@ function addSlider(sliderId, valueId) {
         change: function(event, ui) {
             sliders[sliderId[0].id]['min'] = ui.values[0]/100;
             sliders[sliderId[0].id]['max'] = ui.values[1]/100;
-            console.log(sliders);
             executeSplunk();
 
         }
@@ -376,19 +375,24 @@ function macroDef(queryString, applyResults) {
 };
 
 function createMacro(sliderName){
-    console.log("slidername is " +sliderName);
     switch(sliderName){
         case 'slider-range-pollution':
             splunkMacros.push(new pollutionChartMacro());
+            break;
         case 'slider-range-crime':
             splunkMacros.push(new crimeChartMacro());
+            break;
         case 'slider-range-health':
             splunkMacros.push(new healthChartMacro());
+            break;
         case 'slider-range-urbanness':
             splunkMacros.push(new urbanChartMacro());
+            break;
         case 'slider-range-greenness':
             splunkMacros.push(new greenChartMacro());
+            break;
         default:
             console.log('no valid slider provided');
+            break;
     }
 };
