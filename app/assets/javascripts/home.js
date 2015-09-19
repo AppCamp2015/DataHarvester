@@ -262,8 +262,8 @@ function splunkMacro(bbox, sliderValues) {
 
 function pollutionChartMacro() {
     console.log("creating new chart macro");
-    this.chart = new splunkjs.UI.Charting.Chart($("#pollutionchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
-    this.chartMode = {
+    var chart = new splunkjs.UI.Charting.Chart($("#pollutionchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
+    var chartMode = {
         "chart.stackMode": "stacked"
     };
     var searchString = function() {
@@ -273,15 +273,15 @@ function pollutionChartMacro() {
     this.getMacroDef = function() {
         // this regenerates the searchstring based on current values e.g call the macro function once 
         return new macroDef(searchString(), function(results, err) {
-            chart.setData(results, chartmode);
+            chart.setData(results, chartMode);
             chart.draw();
         });
     }
 };
 
 function healthChartMacro() {
-    this.chart = new splunkjs.UI.Charting.Chart($("#healthchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
-    this.chartMode = {
+    var chart = new splunkjs.UI.Charting.Chart($("#healthchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
+    var chartMode = {
         "chart.stackMode": "stacked"
     };
     var searchString = function() {
@@ -291,15 +291,15 @@ function healthChartMacro() {
     this.getMacroDef = function() {
         // this regenerates the searchstring based on current values e.g call the macro function once 
         return new macroDef(searchString(), function(results, err) {
-            chart.setData(results, chartmode);
+            chart.setData(results, chartMode);
             chart.draw();
         });
     }
 };
 
 function crimeChartMacro() {
-    this.chart = new splunkjs.UI.Charting.Chart($("#crimechart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
-    this.chartMode = {
+    var chart = new splunkjs.UI.Charting.Chart($("#crimechart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
+    var chartMode = {
         "chart.stackMode": "stacked"
     };
     var searchString = function() {
@@ -309,7 +309,7 @@ function crimeChartMacro() {
     this.getMacroDef = function() {
         // this regenerates the searchstring based on current values e.g call the macro function once 
         return new macroDef(searchString(), function(results, err) {
-            chart.setData(results, chartmode);
+            chart.setData(results, chartMode);
             chart.draw();
         });
     }
@@ -317,8 +317,8 @@ function crimeChartMacro() {
 };
 
 function urbanChartMacro() {
-    this.chart = new splunkjs.UI.Charting.Chart($("#urbanchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
-    this.chartMode = {
+    var chart = new splunkjs.UI.Charting.Chart($("#urbanchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
+    var chartMode = {
         "chart.stackMode": "stacked"
     };
     var searchString = function() {
@@ -328,7 +328,7 @@ function urbanChartMacro() {
     this.getMacroDef = function() {
         // this regenerates the searchstring based on current values e.g call the macro function once 
         return new macroDef(searchString(), function(results, err) {
-            chart.setData(results, chartmode);
+            chart.setData(results, chartMode);
             chart.draw();
         });
     }
@@ -336,8 +336,8 @@ function urbanChartMacro() {
 };
 
 function greenChartMacro() {
-    this.chart = new splunkjs.UI.Charting.Chart($("#greenchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
-    this.chartMode = {
+    var chart = new splunkjs.UI.Charting.Chart($("#greenchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
+    var chartMode = {
         "chart.stackMode": "stacked"
     };
     var searchString = function() {
@@ -347,7 +347,7 @@ function greenChartMacro() {
     this.getMacroDef = function() {
         // this regenerates the searchstring based on current values e.g call the macro function once 
         return new macroDef(searchString(), function(results, err) {
-            chart.setData(results, chartmode);
+            chart.setData(results, chartMode);
             chart.draw();
         });
     }
