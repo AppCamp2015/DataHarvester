@@ -261,10 +261,10 @@ function splunkMacro(bbox, sliderValues) {
 function pollutionChartMacro() {
     var chart = new splunkjs.UI.Charting.Chart($("#pollutionchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
     var chartMode = {
-        "chart.stackMode": "default",
+        "chart.stackMode": "stacked",
         "chart.style": "shiny",
         "axisTitleX.text": "Years",
-        "axisY2.enabled": 0
+        "axisTitleY.text": ""
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
@@ -288,7 +288,9 @@ function healthChartMacro() {
         "chart.stackMode": "default",
         "chart.style": "shiny",
         "axisTitleX.text": "Years",
-        "axisY2.enabled": 0
+        "axisTitleY.text": "",
+        "axisY.minimumNumber": "0.0",
+        "axisY.maximumNumber": "1.0"
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
@@ -312,7 +314,9 @@ function crimeChartMacro() {
         "chart.stackMode": "default",
         "chart.style": "shiny",
         "axisTitleX.text": "Years",
-        "axisY2.enabled": 0
+        "axisTitleY.text": "",
+        "axisY.minimumNumber": "0.0",
+        "axisY.maximumNumber": "1.0"
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
