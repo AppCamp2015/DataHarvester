@@ -4,6 +4,10 @@ namespace :geodata do
 		require 'json'
 		require 'pry'
 		require 'active_support/core_ext'
+		require 'logger'
+
+
+	$logger = Logger.new('geodata.log')
 
 	def request_nearest_time_in(requestLayers)
 		# finds the valid dates between the daterange 
@@ -25,8 +29,9 @@ namespace :geodata do
 				response = HTTParty.get('http://ramani.ujuizi.com/ddl/wms?item=layerDetails&layerName='+layerid+'&time=&request=GetMetadata&token=b163d3f52ebf1cf29408464289cf5eea20cda538&package=com.web.ramani')				
 				layer = JSON.parse(response.body)
 				puts "response received for #{layerid}"
-		rescue 
+		rescue => err
 				puts "response timed out for #{layerid}"
+				$logger.error(err)
 		end
 		return layer
 	end
@@ -38,8 +43,9 @@ namespace :geodata do
 				response = HTTParty.get('http://ramani.ujuizi.com/ddl/wms?item=layerDetails&layerName='+layer['id']+'&time=&request=GetMetadata&token=b163d3f52ebf1cf29408464289cf5eea20cda538&package=com.web.ramani')				
 				layer['timedata'] = JSON.parse(response.body)
 				puts "response received for #{layer['id']}"
-		rescue 
+		rescue => err
 				puts "response timed out for #{layer['id']}"
+				$logger.error(err)
 		end
 		return layer
 	end
@@ -176,24 +182,31 @@ namespace :geodata do
 		end
 		responseData = callRamaniforJson(layername, time, linestring[0...-1])
 		outputArray = []
-		if responseData == "Timed out"
-			return
+		timecounter = artificialtime
+		if responseData == nil
+			$logger.error("Ramani call failed for #{layername}")
+			return timecounter
 		end
 
-		timecounter = artificialtime
 		responseData['transect']['transectData'].each do |trans|
-			trans['lon'] = trans['location'].split(" ")[0]
-			trans['lat'] = trans['location'].split(" ")[1]
-			trans['city'] = city['City']
-			trans['time'] = (DateTime::parse(time) + timecounter.seconds).to_s
-			trans['layer'] = layername
-			outputArray.push(trans)
-			timecounter += 1
+			begin
+				trans['lon'] = trans['location'].split(" ")[0]
+				trans['lat'] = trans['location'].split(" ")[1]
+				trans['city'] = city['City']
+				trans['time'] = (DateTime::parse(time) + timecounter.seconds).to_s
+				trans['layer'] = layername
+				outputArray.push(trans)
+				timecounter += 1
+			rescue => err
+				puts "Transect parse error"
+				$logger.error(err)
+			end 
 		end
 		outputlayername = layername.gsub(/\//	,'-')
 		f = File.new("newtransects/transects-#{outputlayername}-#{city['Country']}-#{city['City']}.json","w")
 		f.write(JSON.pretty_generate(outputArray))
 		f.close
+		$logger.info("completed generation for #{outputlayername} -#{city['City']}")
 		return timecounter
 	end
 
@@ -202,17 +215,22 @@ def callRamaniforJson(layer, time, linestring)
 	timeout = false
 	begin
 		response  = HTTParty.get("http://ramani.ujuizi.com/ddl/wms?token=b163d3f52ebf1cf29408464289cf5eea20cda538&package=com.web.ramani&REQUEST=GetTransect&LAYER=#{layer}&CRS=EPSG:4326&TIME=#{time}&LINESTRING=#{linestring},&FORMAT=text/json&COLORSCALERANGE=-140,140&NUMCOLORBANDS=250&LOGSCALE=false&PALETTE=redblue&VERSION=1.1.1")
-	rescue
-		timeout = true	
+		if response.code != 200
+			return nil
+		end
+	rescue => err
+		timeout = true
+		$logger.error(err)	
 	end
 	if timeout == false
 		begin
 		results = JSON.parse(response.body)
-		rescue
-		results = "JSON parse error for #{layer}" 	
+		rescue => err
+		results = nil 	
+		$logger.error(err)
 		end 
 	else
-		results = "Timed out"
+		results = nil
 	end
 	return results
 end
@@ -226,7 +244,6 @@ end
 		response = HTTParty.get('http://a.ramani.ujuizi.com/ddl/wms?item=menu&menu=&request=GetMetadata&token=null')
 
 		responseObject = JSON.parse(response.body)
-
 
 		f = File.new('layermeta.json',"w")
 		f.write(JSON.pretty_generate(responseObject))
@@ -310,6 +327,7 @@ end
 			puts "Writing data for #{city['City']}"
 			rescue
 			city['satellitedata'] = 'Timed out'
+			$logger.error("Timed out in generateDataForCity for #{city['City']}")
 			end
 		end		
 		puts "Success"
@@ -319,7 +337,7 @@ end
 
 		# layersfile = CGI::escape(ENV['LAYER'])
 		# citiesfile = CGI::escape(ENV['CITY'])
-		
+		$logger.info("Start city harvest job at #{DateTime.now}")		
 		# timeLayerObject = request_times_in(daterange,layer)
 		# timeLayerObject = request_times_in('date','simS3seriesCoverGlobal/coverclass')
 		reqdlayers = ["simS5seriesForAirQualityEuro/no2_conc","simS5seriesForAirQualityEuro/o3_conc","simS5seriesForAirQualityEuro/so2_conc","simS3seriesLaiGlobal/lai","simS3seriesCoverGlobal/coverclass","simS3seriesNighttimeLightsGlob/brightness"]
@@ -332,6 +350,10 @@ end
 		cities.each do |city|
 			timeLayerObject.each do |timelayer|
 				puts "Generating Data for #{city['City']}"
+				$logger.info("Generating data for #{city['City']}")
+				if timecounter == nil
+					timecounter = 1
+				end
 				timecounter =  generateDataForCityLayerTime(city,timelayer['timedata']['nearestTimeIso'],timelayer['id'],timecounter)
 			end
 		end
