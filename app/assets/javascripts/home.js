@@ -323,9 +323,8 @@ function greenChartMacro() {
 
 function cityListMacro() {
 
-    var macro = new splunkMacro(generateBBOX(), sliders);
     var searchString = function() {
-        var macro = new splunkMacro(generateBBOX(), sli);
+        var macro = new splunkMacro(generateBBOX(), sliders);
         return generateQueryString('city_list', macro);
     };
     this.getMacroDef = function() {
