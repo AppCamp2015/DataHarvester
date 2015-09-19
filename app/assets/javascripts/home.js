@@ -277,7 +277,8 @@ function pollutionChartMacro() {
             $("#pollutionchartloading").hide();
             chart.setData(results, chartMode);
             chart.draw();
-        }, function(){
+        }, function() {
+
             $("#pollutionchartloading").show();
         });
     }
@@ -329,7 +330,7 @@ function crimeChartMacro() {
             $("#crimechartloading").hide();
             chart.setData(results, chartMode);
             chart.draw();
-        }, function(){
+        }, function() {
             $("#crimechartloading").show();
         });
     }
@@ -350,7 +351,7 @@ function urbanChartMacro() {
             $("#urbanchartloading").hide();
             chart.setData(results, chartMode);
             chart.draw();
-        }, function(){
+        }, function() {
             $("#urbanchartloading").show();
         });
     }
@@ -371,6 +372,7 @@ function greenChartMacro() {
             chart.setData(results, chartMode);
             chart.draw();
         }, function(){
+
         });
     }
 };
@@ -425,7 +427,15 @@ function cityListMacro() {
     };
     this.getMacroDef = function() {
         // this regenerates the searchstring based on current values e.g call the macro function once 
-        return new macroDef(searchString(), function(results, err) {}, function(results, err) {});
+        return new macroDef(searchString(), function(results, err) {
+                console.log(results);
+                // here goes the code for rendering the results. 
+                addMapMarkers(results);
+
+            },
+            function(results, err) {
+
+            });
     }
 }
 
@@ -458,4 +468,80 @@ function createMacro(sliderName) {
             console.log('no valid slider provided');
             break;
     }
+};
+
+function addMapMarkers(results){
+
+    var points = [];
+
+    var iconStyle = new ol.style.Style({
+        image: new ol.style.Icon( /** @type {olx.style.IconOptions} */ ({
+            anchor: [0.5, 46],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            opacity: 0.75,
+            src: 'https://developer.mapquest.com/sites/default/files/mapquest/osm/mq_logo.png'
+        }))
+    });
+
+    for (var i = 0; i < results['columns'][0].length-1; i++) {
+        
+        points.push(new ol.Feature({
+                geometry: new ol.geom.Point(results['columns'][3][i], results['columns'][2][i]),
+                name: results['columns'][1][i],
+		country: results['columns'][0][i]
+                })
+        );
+        points[i].setStyle(iconStyle);
+    }
+
+    // the vector source for the marker layer is defined by map.getLayers()[2].getSource();
+    // the source can be set by map.getLayers()[2].setSource( ol.source.Vector type)
+
+
+
+    var pointSource = new ol.source.Vector({
+        features: points
+    });
+
+		var iconFeature = new ol.Feature({
+  geometry: new ol.geom.Point([0, 0]),
+  name: 'Null Island',
+  population: 4000,
+  rainfall: 500
+});
+
+var iconFeature2 = new ol.Feature({
+  geometry: new ol.geom.Point(ol.proj.transform([0,10], 'EPSG:4326', 'EPSG:3857')),
+  name: 'Null Island',
+  population: 4000,
+  rainfall: 500
+});
+
+var iconStyle = new ol.style.Style({
+  image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+    anchor: [0.5, 46],
+    anchorXUnits: 'fraction',
+    anchorYUnits: 'pixels',
+    opacity: 0.75,
+    src: 'https://developer.mapquest.com/sites/default/files/mapquest/osm/mq_logo.png'
+  }))
+});
+
+iconFeature.setStyle(iconStyle);
+iconFeature2.setStyle(iconStyle);
+
+var newVectorSource = new ol.source.Vector({
+  features: points
+});
+
+var newVectorLayer = new ol.layer.Vector({
+  source: newVectorSource
+});
+
+map.addLayer(newVectorLayer);
+	
+    // map.getLayers().getArray()[2].setSource(pointSource);
+	// pointSource.addFeatures(points);	
+	
 };
