@@ -235,10 +235,9 @@ function pollutionChartMacro() {
         "chart.stackMode": "default",
         "chart.style": "shiny",
         "axisTitleX.text": "Years",
-        "axisTitleY.visibility": "collapsed",
-        "axisY.enabled": 0,
-        "axisY.minimumNumber": 0,
-        "axisY.maximumNumber": 1
+        "axisTitleY.text": "",
+        "axisY.minimumNumber": "0.0",
+        "axisY.maximumNumber": "1.0"
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
@@ -262,9 +261,9 @@ function healthChartMacro() {
         "chart.stackMode": "default",
         "chart.style": "shiny",
         "axisTitleX.text": "Years",
-        "axisTitleY.visibility": "collapsed",
-        "axisY.minimumNumber": 0,
-        "axisY.maximumNumber": 1
+        "axisTitleY.text": "",
+        "axisY.minimumNumber": "0.0",
+        "axisY.maximumNumber": "1.0"
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
@@ -288,10 +287,9 @@ function crimeChartMacro() {
         "chart.stackMode": "default",
         "chart.style": "shiny",
         "axisTitleX.text": "Years",
-        "axisY.enabled": 0,
-        "axisTitleY.visibility": "collapsed",
-        "axisY.minimumNumber": 0,
-        "axisY.maximumNumber": 1
+        "axisTitleY.text": "",
+        "axisY.minimumNumber": "0.0",
+        "axisY.maximumNumber": "1.0"
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
