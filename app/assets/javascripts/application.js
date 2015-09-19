@@ -16,3 +16,4 @@
 //= require_directory .
 //= require ol
 //= require twitter/bootstrap	
+//= require jquery-ui

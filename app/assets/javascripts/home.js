@@ -1,190 +1,384 @@
-function splunkSearch(){
-    var obj= {};
+var splunklogin = false;
+var runningjobs = null;
+var currentJobs = [];
+var map;
+var splunkMacros = [];
+var sliders = {};
+
+$('document').ready(function() {
+
+    loginToSplunk();
+    generateMap();
+    addSlider($('#slider-range-health'), $('#healthRateValue'));
+    addSlider($('#slider-range-pollution'), $('#pollutionRateValue'));
+    addSlider($('#slider-range-crime'), $('#crimeRateValue'));
+    addSlider($('#slider-range-urbanness'), $('#urbannessRateValue'));
+    addSlider($('#slider-range-greenness'), $('#greennessRateValue'));
+    splunkMacros.push(new cityListMacro());
+    executeSplunk();
+});
+
+
+
+function splunkSearch() {
+
+    var obj = {};
     var objects = $('.rangeFilter');
 
     obj['queryName'] = document.getElementById('searchName').value;
 
 
-    for(var i =0;i<objects.length; i++){
+    for (var i = 0; i < objects.length; i++) {
         console.log(i);
         var id = objects[i].getAttribute('id');
         var value = objects[i].value;
-        
-        obj[id] = value/100;
+
+        obj[id] = value / 100;
     };
-    console.log('object for splunk search:', obj); 
+    console.log('object for splunk search:', obj);
+    console.log(generateBBOX());
+    if (splunklogin == true) {
+        executeSplunk();
+    } else {
+        loginToSplunk();
+    }
 }
 
+function addSlider(sliderId, valueId) {
 
-function selectCategory(id){
-    var newLabel = document.createElement('label');
-    var newdiv = document.createElement('input');
-    newdiv.setAttribute('class',"rangeFilter");
-    newdiv.setAttribute('type',"range");
-    newdiv.setAttribute('id',id + "range");
-    newdiv.setAttribute('min', "0");
-    newdiv.setAttribute('max', "100");
-    newdiv.setAttribute('value', "");
-    newLabel.innerHTML = id;
-    document.getElementById('timeSearch').appendChild(newLabel);
-    document.getElementById('timeSearch').appendChild(newdiv);
-    document.getElementById(id).remove(); 
+    var sliderId = sliderId;
+    var valueId = valueId;
+    $(sliderId).slider({
+        range: true,
+        min: 0,
+        max: 100,
+        values: [0, 100],
+        create: function(event, ui) {
+            sliders[sliderId[0].id] = {};
+            sliders[sliderId[0].id]['min'] = 0;
+            sliders[sliderId[0].id]['max'] = 1;
+            createMacro(sliderId[0].id);
+        },
+        slide: function(event, ui) {
+            $(valueId).val(ui.values[0] + "% - " + ui.values[1] + "%");
+        },
+        change: function(event, ui) {
+            sliders[sliderId[0].id]['min'] = ui.values[0] / 100;
+            sliders[sliderId[0].id]['max'] = ui.values[1] / 100;
+            executeSplunk();
+
+        }
+    });
+    $(valueId).val($(sliderId).slider("values", 0) +
+        "% - " + $(sliderId).slider("values", 1) + "%");
 }
 
-function loginToSplunk(){
-
+function loginToSplunk() {
     http = new splunkjs.ProxyHttp("/proxy");
     service = new splunkjs.Service(http, {
         username: "esa",
         password: "esa",
     });
     service.login(function(err, success) {
-                if (err) {
-                    throw err;            
-                }
-                console.log("Login was successful: " + success);
-                splunklogin = true;
-            });
+        if (err) {
+            alert(err);
+            return;
+        }
+        console.log("Login was successful: " + success);
+        splunklogin = true;
+    });
 };
 
-function generateMap(){
+function handleSplunkJob(macroDef) {
+
+    macroDef.startLoading();
+
+    var search = macroDef.queryString;
+    var cancelled = false;
+    service.oneshotSearch(
+        search, {output_mode : "json_cols"},
+        function(err, results) {
+            if (cancelled) {
+                return
+            };
+            if(err){console.log(err);}
+            macroDef.applyResults(results, err);
+        }
+    );
+    return function() {
+        if (!cancelled) {
+            cancelled = true;
+        }
+    }
+};
+
+function generateBBOX() {
+    var view = map.getView();
+    var extent = view.calculateExtent(map.getSize());
+    var bottomLeft = ol.proj.toLonLat([extent[0], extent[1]]);
+    var topRight = ol.proj.toLonLat([extent[2], extent[3]]);
+
+    return bottomLeft.concat(topRight);
+
+};
+
+function generateMap() {
     var vectorSource = new ol.source.Vector({
-         url: 'assets/countries.geo.json',
-         format: new ol.format.GeoJSON()
-       });
+        url: 'assets/countries.geo.json',
+        format: new ol.format.GeoJSON()
+    });
 
-       var map = new ol.Map({
-         target: 'map',
-         layers: [
-           new ol.layer.Tile({
-             source: new ol.source.MapQuest({layer: 'sat'})
-           })
-         ,
-             new ol.layer.Vector({
-                 source: vectorSource
+    map = new ol.Map({
+        target: 'map',
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.MapQuest({
+                    layer: 'sat'
+                })
+            }),
+            new ol.layer.Vector({
+                source: vectorSource
 
-                 
-             })
-         ],
-         view: new ol.View({
-           center: ol.proj.transform([37.41, 8.82], 'EPSG:4326', 'EPSG:3857'),
-           zoom: 4
-         })
-       });
 
-               // a normal select interaction to handle click
-       var select = new ol.interaction.Select();
-       map.addInteraction(select);
-       
-       map.on('moveend',(function(){
-         
-         var view = map.getView();
-         var extent = view.calculateExtent(map.getSize());
-         var bottomLeft = ol.proj.toLonLat([extent[0],extent[1]]);
-         var topRight  = ol.proj.toLonLat([extent[2],extent[3]]);
-         var bbox = bottomLeft.concat(topRight);
-         console.log(bbox);
-         if (splunklogin == true){
-            executeSplunk(bbox);   
-         } else {
+            })
+        ],
+        view: new ol.View({
+            center: ol.proj.transform([37.41, 8.82], 'EPSG:4326', 'EPSG:3857'),
+            zoom: 4
+        })
+    });
 
+    // a normal select interaction to handle click
+    var select = new ol.interaction.Select();
+    map.addInteraction(select);
+
+    map.on('moveend', (function() {
+        if (splunklogin == true) {
+            executeSplunk();
+        } else {
             loginToSplunk();
-         } 
-         
+        }
 
+    }))
 
-       }))
-       
-       var selectedFeatures = select.getFeatures();
+    var selectedFeatures = select.getFeatures();
 
-       // a DragBox interaction used to select features by drawing boxes
-       var dragBox = new ol.interaction.DragBox({
-         condition: ol.events.condition.shiftKeyOnly,
-         style: new ol.style.Style({
-           stroke: new ol.style.Stroke({
-             color: [0, 0, 255, 1]
-           })
-         })
-       });
+    // a DragBox interaction used to select features by drawing boxes
+    var dragBox = new ol.interaction.DragBox({
+        condition: ol.events.condition.shiftKeyOnly,
+        style: new ol.style.Style({
+            stroke: new ol.style.Stroke({
+                color: [0, 0, 255, 1]
+            })
+        })
+    });
 
-       map.addInteraction(dragBox);
+    map.addInteraction(dragBox);
 
-       var infoBox = document.getElementById('info');
+    var infoBox = document.getElementById('info');
 
-       dragBox.on('boxend', function(e) {
-         // features that intersect the box are added to the collection of
-         // selected features, and their names are displayed in the "info"
-         // div
-         var info = [];
-         var extent = dragBox.getGeometry().getExtent();
-         console.log(extent);
-         vectorSource.forEachFeatureIntersectingExtent(extent, function(feature) {
-           selectedFeatures.push(feature);
-           info.push(feature.get('name'));
-         });
-         if (info.length > 0) {
-           infoBox.innerHTML = info.join(', ');
-         }
-       });
+    dragBox.on('boxend', function(e) {
+        // features that intersect the box are added to the collection of
+        // selected features, and their names are displayed in the "info"
+        // div
+        var info = [];
+        var extent = dragBox.getGeometry().getExtent();
+        console.log(extent);
+        vectorSource.forEachFeatureIntersectingExtent(extent, function(feature) {
+            selectedFeatures.push(feature);
+            info.push(feature.get('name'));
+        });
+        if (info.length > 0) {
+            infoBox.innerHTML = info.join(', ');
+        }
+    });
 
 
 };
-var splunklogin = false
-$('document').ready(function(){
 
-    loginToSplunk();
-    generateMap();
-});
+function executeSplunk() {
+    // get the value of the search div
+    currentJobs.forEach(function(job) {
+        job();
+    });
+    currentJobs = [];
+
+    // var splunkMacros = getSplunkMacros();
+
+    splunkMacros.forEach(function(macro) {
+        var macroDef = macro.getMacroDef();
+        currentJobs.push(handleSplunkJob(macroDef));
+    });
+};
+
+function generateQueryString(chartName, macro) {
+    return " `" + chartName + "(" +
+        macro.minLat + "," + macro.maxLat + "," + macro.minLong + "," + macro.maxLong + "," + macro.sliderValues['slider-range-pollution']['min'] +
+        "," + macro.sliderValues['slider-range-pollution']['max'] +
+        "," + macro.sliderValues['slider-range-crime']['min'] + "," + macro.sliderValues['slider-range-crime']['max'] + "," + macro.sliderValues['slider-range-health']['min'] +
+        "," + macro.sliderValues['slider-range-health']['max'] + "," + macro.sliderValues['slider-range-urbanness']['min'] + "," + macro.sliderValues['slider-range-urbanness']['max'] + "," + macro.sliderValues['slider-range-greenness']['min'] + "," + macro.sliderValues['slider-range-greenness']['max'] + ")`";
+}
+
+// A splunk macro query builder takes in values for each splunk macro and generates the correct values
+// 
+function splunkMacro(bbox, sliderValues) {
+    this.minLat = bbox[1];
+    this.maxLat = bbox[3];
+    this.minLong = bbox[0];
+    this.maxLong = bbox[2];
+    this.sliderValues = sliderValues;
+};
+
+function pollutionChartMacro() {
+    var chart = new splunkjs.UI.Charting.Chart($("#pollutionchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
+    var chartMode = {
+        "chart.stackMode": "default",
+        "chart.style": "shiny",
+        "axisTitleX.text": "Years",
+        "axisY2.enabled": 0
+    };
+    var searchString = function() {
+        var macro = new splunkMacro(generateBBOX(), sliders);
+        return generateQueryString('pollution_chart', macro);
+    };
+    this.getMacroDef = function() {
+        // this regenerates the searchstring based on current values e.g call the macro function once 
+        return new macroDef(searchString(), function(results, err) {
+            $("#pollutionchartloading").hide();
+            chart.setData(results, chartMode);
+            chart.draw();
+        }, function(){
+            $("#pollutionchartloading").show();
+        });
+    }
+};
+
+function healthChartMacro() {
+    var chart = new splunkjs.UI.Charting.Chart($("#healthchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
+    var chartMode = {
+        "chart.stackMode": "default",
+        "chart.style": "shiny",
+        "axisTitleX.text": "Years",
+        "axisY2.enabled": 0
+    };
+    var searchString = function() {
+        var macro = new splunkMacro(generateBBOX(), sliders);
+        return generateQueryString('health_chart', macro);
+    };
+    this.getMacroDef = function() {
+        // this regenerates the searchstring based on current values e.g call the macro function once 
+        return new macroDef(searchString(), function(results, err) {
+            $("#healthchartloading").hide();
+            chart.setData(results, chartMode);
+            chart.draw();
+        }, function(){
+            $("#healthchartloading").show();
+        });
+    }
+};
+
+function crimeChartMacro() {
+    var chart = new splunkjs.UI.Charting.Chart($("#crimechart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
+    var chartMode = {
+        "chart.stackMode": "default",
+        "chart.style": "shiny",
+        "axisTitleX.text": "Years",
+        "axisY2.enabled": 0
+    };
+    var searchString = function() {
+        var macro = new splunkMacro(generateBBOX(), sliders);
+        return generateQueryString('crime_chart', macro);
+    };
+    this.getMacroDef = function() {
+        // this regenerates the searchstring based on current values e.g call the macro function once 
+        return new macroDef(searchString(), function(results, err) {
+            $("#crimechartloading").hide();
+            chart.setData(results, chartMode);
+            chart.draw();
+        }, function(){
+            $("#crimechartloading").show();
+        });
+    }
+
+};
+
+function urbanChartMacro() {
+    var chart = new splunkjs.UI.Charting.Chart($("#urbanchart"), splunkjs.UI.Charting.ChartType.PIE, false);
+    var chartMode = {
+    };
+    var searchString = function() {
+        var macro = new splunkMacro(generateBBOX(), sliders);
+        return generateQueryString('urbanness_chart', macro);
+    };
+    this.getMacroDef = function() {
+        // this regenerates the searchstring based on current values e.g call the macro function once 
+        return new macroDef(searchString(), function(results, err) {
+            $("#urbanchartloading").hide();
+            chart.setData(results, chartMode);
+            chart.draw();
+        }, function(){
+            $("#urbanchartloading").show();
+        });
+    }
+
+};
+
+function greenChartMacro() {
+    var chart = new splunkjs.UI.Charting.Chart($("#greenchart"), splunkjs.UI.Charting.ChartType.PIE, false);
+    var chartMode = {
+    };
+    var searchString = function() {
+        var macro = new splunkMacro(generateBBOX(), sliders);
+        return generateQueryString('greenness_chart', macro);
+    };
+    this.getMacroDef = function() {
+        // this regenerates the searchstring based on current values e.g call the macro function once 
+        return new macroDef(searchString(), function(results, err) {
+            chart.setData(results, chartMode);
+            chart.draw();
+        }, function(){
+        });
+    }
+};
 
 
-   
-              function executeSplunk(bbox){
-                // get the value of the search div
+function cityListMacro() {
 
-                var maxlat = bbox[3];
-                var minlat = bbox[1]; 
-                var minlong = bbox[0];
-                var maxlong = bbox[2];
+    var searchString = function() {
+        var macro = new splunkMacro(generateBBOX(), sliders);
+        return generateQueryString('city_list', macro);
+    };
+    this.getMacroDef = function() {
+        // this regenerates the searchstring based on current values e.g call the macro function once 
+        return new macroDef(searchString(), function(results, err) {}, function(results, err) {});
+    }
+}
 
-                var http = new splunkjs.ProxyHttp("/proxy");
-                var service = new splunkjs.Service(http, {
-                    username: "esa",
-                    password: "esa",
-                });
+function macroDef(queryString, applyResults, startLoading) {
+    this.queryString = queryString;
+    this.applyResults = applyResults;
+    this.startLoading = startLoading;
+}
 
-            
-
-            
-            console.log("`pollution_chart(" + minlat + "," + maxlat + "," + minlong + ","+ maxlong +",0,1)`");
-            service.jobs().create(" `pollution_chart(" + minlat + "," + maxlat + "," + minlong + ","+ maxlong +",0,1)`",{
-                status_buckets: 300
-            }, function(err, job){
-                if(err){
-                    console.log(err);
-                    return;
-                }
-                console.log('job created');
-                job.track({}, {
-                    error: function(err) {
-                        console.log('job error: '+err);
-                    },
-                    done: function(job) {
-                        console.log('job done');
-                        job.results({
-                            output_mode: "json_cols"
-                        }, function(err, results){
-                            if(err){
-                                console.log(err);
-                                return;
-                            }
-                            console.log(results);
-                            var chart = new splunkjs.UI.Charting.Chart($("#chart1"), splunkjs.UI.Charting.ChartType.COLUMN, false);
-                            chart.setData(results, {
-                                "chart.stackMode": "stacked"
-                            });
-                            chart.draw();
-                        });
-                    }
-                });
-            });
-                };
+function createMacro(sliderName) {
+    switch (sliderName) {
+        case 'slider-range-pollution':
+            splunkMacros.push(new pollutionChartMacro());
+            break;
+        case 'slider-range-crime':
+            splunkMacros.push(new crimeChartMacro());
+            break;
+        case 'slider-range-health':
+            splunkMacros.push(new healthChartMacro());
+            break;
+        case 'slider-range-urbanness':
+            splunkMacros.push(new urbanChartMacro());
+            break;
+        case 'slider-range-greenness':
+            splunkMacros.push(new greenChartMacro());
+            break;
+        default:
+            console.log('no valid slider provided');
+            break;
+    }
+};
