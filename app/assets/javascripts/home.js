@@ -143,7 +143,8 @@ function generateMap() {
             }),
             new ol.layer.Vector({
                 source: vectorSource
-            })    
+            })
+	    
         ],
         view: new ol.View({
             center: ol.proj.transform([37.41, 8.82], 'EPSG:4326', 'EPSG:3857'),
@@ -406,11 +407,12 @@ function addMapMarkers(results){
         }))
     });
 
-    for (var i = 0; i < results['columns'][0].length; i++) {
+    for (var i = 0; i < results['columns'][0].length-1; i++) {
         
         points.push(new ol.Feature({
-                geometry: new ol.geom.Point(ol.proj.transform([results['columns'][1][i], results['columns'][2][i]], 'EPSG:4326', 'EPSG:3857')),
-                name: results['columns'][0][i]
+                geometry: new ol.geom.Point(results['columns'][3][i], results['columns'][2][i]),
+                name: results['columns'][1][i],
+		country: results['columns'][0][i]
                 })
         );
         points[i].setStyle(iconStyle);
@@ -424,5 +426,45 @@ function addMapMarkers(results){
     var pointSource = new ol.source.Vector({
         features: points
     });
-    map.getLayers()[1].setSource(pointSource);
+
+		var iconFeature = new ol.Feature({
+  geometry: new ol.geom.Point([0, 0]),
+  name: 'Null Island',
+  population: 4000,
+  rainfall: 500
+});
+
+var iconFeature2 = new ol.Feature({
+  geometry: new ol.geom.Point(ol.proj.transform([0,10], 'EPSG:4326', 'EPSG:3857')),
+  name: 'Null Island',
+  population: 4000,
+  rainfall: 500
+});
+
+var iconStyle = new ol.style.Style({
+  image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+    anchor: [0.5, 46],
+    anchorXUnits: 'fraction',
+    anchorYUnits: 'pixels',
+    opacity: 0.75,
+    src: 'https://developer.mapquest.com/sites/default/files/mapquest/osm/mq_logo.png'
+  }))
+});
+
+iconFeature.setStyle(iconStyle);
+iconFeature2.setStyle(iconStyle);
+
+var newVectorSource = new ol.source.Vector({
+  features: points
+});
+
+var newVectorLayer = new ol.layer.Vector({
+  source: newVectorSource
+});
+
+map.addLayer(newVectorLayer);
+	
+    // map.getLayers().getArray()[2].setSource(pointSource);
+	// pointSource.addFeatures(points);	
+	
 };
