@@ -242,6 +242,7 @@ function pollutionChartMacro() {
     this.getMacroDef = function() {
         // this regenerates the searchstring based on current values e.g call the macro function once 
         return new macroDef(searchString(), function(results, err) {
+            $("#pollutionchartloading").hide();
             chart.setData(results, chartMode);
             chart.draw();
         }, function(){
