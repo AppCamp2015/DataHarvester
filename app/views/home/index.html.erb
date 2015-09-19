@@ -43,11 +43,6 @@
 	 
 					<div id="slider-range-crime"></div>
 
-
-	<script type="text/javascript">
-		$(window).load(addSlider($('#slider-range-crime'), $('#crimeRateValue')));
-
-	</script>
 					<p>
 					  <%= link_to(image_tag("screens_pollution.png", :class => "pollutionRate", :alt => "pollutionRate", :size => "20", :title => 'pollutionRate')) %>
 					  <label for="pollutionRateValue" class="indicatorLabel"> Pollution Rate:</label>
@@ -57,20 +52,12 @@
 					<div id="slider-range-pollution"></div>
  
 
-					<script type="text/javascript">
-						$(window).load(addSlider($('#slider-range-pollution'), $('#pollutionRateValue')));
-					</script>
-
 					<p>
 					  <%= link_to(image_tag("screens_health.png", :class => "healthRate", :alt => "healthRate", :size => "20", :title => 'healthRate')) %>
 					  <label for="healthRateValue" class="indicatorLabel"> Pollution Rate:</label>
 					  <input type="text" id="healthRateValue" class="indicatorValue" readonly > </input>
 					</p>
 					<div id="slider-range-health"></div>
-					<script type="text/javascript">
-						$(window).load(addSlider($('#slider-range-health'), $('#healthRateValue')));
-						
-					</script>
 				</div>
     			<br><br>
     			<div id="adjustFilters" class="dropdown">
@@ -128,7 +115,9 @@
 			<div id="querytest"></div>
 		</div>
 		<div class="row">
-		<div id="chart1"></div>
+		<div id="pollutionchart"></div>
+		<div id="crimechart"></div>
+		<div id="healthchart"></div>
 		</div>
 </div>
 </div>

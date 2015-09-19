@@ -2,14 +2,16 @@ var splunklogin = false;
 var runningjobs = null;
 var currentJobs = [];
 var map;
-var splunkMacros;
+var splunkMacros = [];
 var sliders = {};
 
 $('document').ready(function() {
 
     loginToSplunk();
     generateMap();
-    splunkMacros = getSplunkMacros();
+    addSlider($('#slider-range-health'), $('#healthRateValue'));
+    addSlider($('#slider-range-pollution'), $('#pollutionRateValue'));
+    addSlider($('#slider-range-crime'), $('#crimeRateValue'));
 });
 
 
@@ -86,7 +88,7 @@ function loginToSplunk() {
 function handleSplunkJob(macroDef) {
 
 
-    var search = macroDef.search;
+    var search = macroDef.queryString;
     var thisjob = null;
 
     service.jobs().create(search, {
@@ -247,13 +249,13 @@ function splunkMacro(bbox, sliderValues) {
 };
 
 function pollutionChartMacro() {
-    var chart = new splunkjs.UI.Charting.Chart($("#chart1"), splunkjs.UI.Charting.ChartType.COLUMN, false);
+    console.log("creating new chart macro");
+    var chart = new splunkjs.UI.Charting.Chart($("#pollutionchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
     var chartMode = {
         "chart.stackMode": "stacked"
     };
-    var macro = new splunkMacro(generateBBOX(), getSliderValues());
     var searchString = function() {
-        var macro = new splunkMacro(generateBBOX(), getSliderValues());
+        var macro = new splunkMacro(generateBBOX(), sliders);
         return " `pollution_chart(" +
             macro.minLong + "," + macro.maxLong + "," + macro.minLat + "," + macro.minLat + "," + macro.sliders['pollution']['min'] +
             "," + macro.sliders['pollution']['max'] +
@@ -269,13 +271,12 @@ function pollutionChartMacro() {
 };
 
 function healthChartMacro() {
-    var chart = new splunkjs.UI.Charting.Chart($("#chart1"), splunkjs.UI.Charting.ChartType.COLUMN, false);
+    var chart = new splunkjs.UI.Charting.Chart($("#healthchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
     var chartMode = {
         "chart.stackMode": "stacked"
     };
-    var macro = new splunkMacro(generateBBOX(), getSliderValues());
     var searchString = function() {
-        var macro = new splunkMacro(generateBBOX(), getSliderValues());
+        var macro = new splunkMacro(generateBBOX(), sliders);
         return " `health_chart(" +
             macro.minLong + "," + macro.maxLong + "," + macro.minLat + "," + macro.minLat + "," + macro.sliders['pollution']['min'] +
             "," + macro.sliders['pollution']['max'] +
@@ -295,9 +296,8 @@ function crimeChartMacro() {
     var chartMode = {
         "chart.stackMode": "stacked"
     };
-    var macro = new splunkMacro(generateBBOX(), getSliderValues());
     var searchString = function() {
-        var macro = new splunkMacro(generateBBOX(), getSliderValues());
+        var macro = new splunkMacro(generateBBOX(), sliders);
         return " `crime_chart(" +
             macro.minLong + "," + macro.maxLong + "," + macro.minLat + "," + macro.minLat + "," + macro.sliders['pollution']['min'] +
             "," + macro.sliders['pollution']['max'] +
@@ -317,7 +317,7 @@ function cityListMacro() {
 
     var macro = new splunkMacro(generateBBOX(), sliders);
     var searchString = function() {
-        var macro = new splunkMacro(generateBBOX(), getSliderValues());
+        var macro = new splunkMacro(generateBBOX(), sli);
         return " `city_list(" +
             macro.minLong + "," + macro.maxLong + "," + macro.minLat + "," + macro.minLat + "," + macro.sliders['pollution']['min'] +
             "," + macro.sliders['pollution']['max'] +
@@ -337,13 +337,13 @@ function macroDef(queryString, applyResults) {
 };
 
 function createMacro(sliderName){
-
+    console.log("slidername is " +sliderName);
     switch(sliderName){
-        case '#slider-range-pollution':
+        case 'slider-range-pollution':
             splunkMacros.push(new pollutionChartMacro());
-        case '#slider-range-crime':
+        case 'slider-range-crime':
             splunkMacros.push(new crimeChartMacro());
-        case '#slider-range-health':
+        case 'slider-range-health':
             splunkMacros.push(new healthChartMacro());
         default:
             console.log('no valid slider provided');
