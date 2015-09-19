@@ -51,19 +51,19 @@ function addSlider(sliderId, valueId) {
         range: true,
         min: 0,
         max: 100,
-        values: [25, 75],
+        values: [0, 100],
         create: function(event, ui) {
             sliders[sliderId[0].id] = {};
-            sliders[sliderId[0].id]['min'] = 25;
-            sliders[sliderId[0].id]['max'] = 75;
+            sliders[sliderId[0].id]['min'] = 0;
+            sliders[sliderId[0].id]['max'] = 1;
             createMacro(sliderId[0].id);            
         },
         slide: function(event, ui) {
             $(valueId).val(ui.values[0] + "% - " + ui.values[1] + "%");
         },
         change: function(event, ui) {
-            sliders[sliderId[0].id]['min'] = ui.values[0];
-            sliders[sliderId[0].id]['max'] = ui.values[1];
+            sliders[sliderId[0].id]['min'] = ui.values[0]/100;
+            sliders[sliderId[0].id]['max'] = ui.values[1]/100;
             console.log(sliders);
             executeSplunk();
 
