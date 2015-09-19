@@ -95,7 +95,7 @@ function handleSplunkJob(macroDef) {
     var search = macroDef.queryString;
     var cancelled = false;
     service.oneshotSearch(
-        search, {},
+        search, {output_mode : "json_cols"},
         function(err, results) {
             if (cancelled) {
                 return
