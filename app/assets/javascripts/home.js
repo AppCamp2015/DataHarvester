@@ -43,8 +43,8 @@ function splunkSearch() {
 }
 
 function addSlider(sliderId, valueId) {
+    
     var sliderId = sliderId;
-    sliders[sliderId[0].id] = {};
     console.log(sliderId);
     var valueId = valueId;
     $(sliderId).slider({
@@ -53,6 +53,7 @@ function addSlider(sliderId, valueId) {
         max: 100,
         values: [25, 75],
         create: function(event, ui) {
+            sliders[sliderId[0].id] = {};
             sliders[sliderId[0].id]['min'] = 25;
             sliders[sliderId[0].id]['max'] = 75;
             createMacro(sliderId[0].id);            
