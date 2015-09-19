@@ -27,15 +27,27 @@ function selectCategory(id){
     newRangeFilter.setAttribute('value', "");
     newRangeFilter.setAttribute('onchange', "splunkSearch()");
     newLabel.innerHTML = id;
-    newLabel.setAttribute('id', id+"range-Label");
-    newLabel.setAttribute('class',"rangeFilterLabel");
     document.getElementById('timeSearch').appendChild(newLabel);
     document.getElementById('timeSearch').appendChild(newRangeFilter);
     document.getElementById(id).remove(); 
 }
 
-function loginToSplunk(){
 
+function addSlider(sliderId, valueId ) {
+    $( sliderId ).slider({
+      range: true,
+      min: 0,
+      max: 100,
+      values: [ 25, 75 ],
+      slide: function( event, ui ) {
+        $( valueId).val( ui.values[ 0 ] + "% - " + ui.values[ 1 ] + "%");
+      },
+    });
+    $( valueId ).val( $( sliderId ).slider( "values", 0 ) +
+      "% - " + $( sliderId ).slider( "values", 1 ) + "%" );
+}
+
+function loginToSplunk(){
     http = new splunkjs.ProxyHttp("/proxy");
     service = new splunkjs.Service(http, {
         username: "esa",

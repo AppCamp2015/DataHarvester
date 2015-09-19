@@ -1,5 +1,8 @@
 <nav class="navbar navbar-default" role="navigation">
-	<a class="navbar-brand" id="appTitle" href="#">gQuery</a>
+
+	<%= link_to(image_tag("screens_applogo-grey.png", :class => "headerLogo", :alt => "logo", :size => "20", :title => 'gQuery')) %>
+
+		
 	<ul class="nav navbar-nav">
 		<li class="createQuery">
 			<a href="#">Query</a>
@@ -32,16 +35,51 @@
   					<br><br>
   					<input id="searchName" class="SearchInput" type="text" value="">
     			</div>
-    			<div id="timeSearch" class="form-group">
-        			<label for="timeRange" class="rangeFilterLabel">Time Range:</label>
-  					<input type="range" id="Year" class="rangeFilter" value="" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="5" onchange="splunkSearch()" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="show" data-slider-handle="round" >
-    			</div>
+        		<div id="sliderContainer"> 
+					<p>
+					  <%= link_to(image_tag("screens_crime.png", :class => "crimeRate", :alt => "crimeRate", :size => "20", :title => 'crimeRate')) %>
+					  <label for="crimeRateValue" class="indicatorLabel"> Crime Rate:</label>
+					  <input type="text" id="crimeRateValue" class="indicatorValue" readonly > </input>
+					</p>
+	 
+					<div id="slider-range-crime"></div>
+
+
+	<script type="text/javascript">
+		$(window).load(addSlider($('#slider-range-crime'), $('#crimeRateValue')));
+
+	</script>
+					<p>
+					  <%= link_to(image_tag("screens_pollution.png", :class => "pollutionRate", :alt => "pollutionRate", :size => "20", :title => 'pollutionRate')) %>
+					  <label for="pollutionRateValue" class="indicatorLabel"> Pollution Rate:</label>
+					  <input type="text" id="pollutionRateValue" class="indicatorValue" readonly > </input>
+					</p>
+	 
+					<div id="slider-range-pollution"></div>
+ 
+
+					<script type="text/javascript">
+						$(window).load(addSlider($('#slider-range-pollution'), $('#pollutionRateValue')));
+					</script>
+
+					<p>
+					  <%= link_to(image_tag("screens_health.png", :class => "healthRate", :alt => "healthRate", :size => "20", :title => 'healthRate')) %>
+					  <label for="healthRateValue" class="indicatorLabel"> Pollution Rate:</label>
+					  <input type="text" id="healthRateValue" class="indicatorValue" readonly > </input>
+					</p>
+					<div id="slider-range-health"></div>
+					<script type="text/javascript">
+						$(window).load(addSlider($('#slider-range-health'), $('#healthRateValue')));
+						
+					</script>
+				</div>
     			<br><br>
     			<div id="adjustFilters" class="dropdown">
     			<button class="searchButton btn btn-primary" onclick="splunkSearch()">Search</button>
     			<button id="addFilter" type="button" data-toggle="dropdown" class="dropdown-toggle addFilter btn btn-primary" >+
     				<span class="caret"></span>
     			</button>
+
      		   		<ul class="dropdown-menu" id="dropdownList" aria-labelledby="dropdownMenu1">
             			<li id="Health-Pollution" onclick="selectCategory(id)">Health/ Pollution</li>
 			            <li id="Safety-Crime" onclick="selectCategory(id)">Safety/ Crime</li>
@@ -58,7 +96,7 @@
         <script>
         	$(document).ready(function() {
         		$("#queryBar").css("height", $(".fullwidth-container").height());
-				$('#queryBar').hide();
+				// $('#queryBar').hide();
         	});
 
         </script>
