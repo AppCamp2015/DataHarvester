@@ -3,6 +3,7 @@ var runningjobs = null;
 var currentJobs = [];
 var map;
 var splunkMacros;
+var sliders = {};
 
 $('document').ready(function() {
 
@@ -12,7 +13,9 @@ $('document').ready(function() {
 });
 
 
+
 function splunkSearch() {
+
     var obj = {};
     var objects = $('.rangeFilter');
 
@@ -35,24 +38,37 @@ function splunkSearch() {
     }
 }
 
+function addSlider(sliderId, valueId) {
+    var sliderId = sliderId;
+    sliders[sliderId[0].id] = {};
+    console.log(sliderId);
+    var valueId = valueId;
+    $(sliderId).slider({
+        range: true,
+        min: 0,
+        max: 100,
+        values: [25, 75],
+        create: function(event, ui) {
+            sliders[sliderId[0].id]['min'] = 25;
+            sliders[sliderId[0].id]['max'] = 75;
+            createMacro(sliderId[0].id);            
+        },
+        slide: function(event, ui) {
+            $(valueId).val(ui.values[0] + "% - " + ui.values[1] + "%");
+        },
+        change: function(event, ui) {
+            sliders[sliderId[0].id]['min'] = ui.values[0];
+            sliders[sliderId[0].id]['max'] = ui.values[1];
+            console.log(sliders);
+            executeSplunk();
 
-function selectCategory(id) {
-    var newLabel = document.createElement('label');
-    var newdiv = document.createElement('input');
-    newdiv.setAttribute('class', "rangeFilter");
-    newdiv.setAttribute('type', "range");
-    newdiv.setAttribute('id', id + "range");
-    newdiv.setAttribute('min', "0");
-    newdiv.setAttribute('max', "100");
-    newdiv.setAttribute('value', "");
-    newLabel.innerHTML = id;
-    document.getElementById('timeSearch').appendChild(newLabel);
-    document.getElementById('timeSearch').appendChild(newdiv);
-    document.getElementById(id).remove();
+        }
+    });
+    $(valueId).val($(sliderId).slider("values", 0) +
+        "% - " + $(sliderId).slider("values", 1) + "%");
 }
 
 function loginToSplunk() {
-
     http = new splunkjs.ProxyHttp("/proxy");
     service = new splunkjs.Service(http, {
         username: "esa",
@@ -215,91 +231,121 @@ function executeSplunk() {
     // var splunkMacros = getSplunkMacros();
 
     splunkMacros.forEach(function(macro) {
-            var macroDef = macro.getMacroDef();
-            currentJobs.push(handleSplunkJob(macroDef));
+        var macroDef = macro.getMacroDef();
+        currentJobs.push(handleSplunkJob(macroDef));
+    });
+};
+
+// A splunk macro query builder takes in values for each splunk macro and generates the correct values
+// 
+function splunkMacro(bbox, sliderValues) {
+    this.minLat = bbox[1];
+    this.maxLat = bbox[3];
+    this.minLong = bbox[0];
+    this.maxLong = bbox[2];
+    this.sliderValues = sliderValues;
+};
+
+function pollutionChartMacro() {
+    var chart = new splunkjs.UI.Charting.Chart($("#chart1"), splunkjs.UI.Charting.ChartType.COLUMN, false);
+    var chartMode = {
+        "chart.stackMode": "stacked"
+    };
+    var macro = new splunkMacro(generateBBOX(), getSliderValues());
+    var searchString = function() {
+        var macro = new splunkMacro(generateBBOX(), getSliderValues());
+        return " `pollution_chart(" +
+            macro.minLong + "," + macro.maxLong + "," + macro.minLat + "," + macro.minLat + "," + macro.sliders['pollution']['min'] +
+            "," + macro.sliders['pollution']['max'] +
+            "," + macro.sliders['crime']['min'] + "," + macro.sliders['crime']['max'] + "," + macro.sliders['health']['min'] + "," + macro.sliders['health']['max'] + ")`";
+    };
+    this.getMacroDef = function() {
+        // this regenerates the searchstring based on current values e.g call the macro function once 
+        return new macroDef(searchString(), function(results, err) {
+            chart.setData(results, chartmode);
+            chart.draw();
         });
-    };
+    }
+};
 
-    // A splunk macro query builder takes in values for each splunk macro and generates the correct values
-    // 
-    function splunkMacro(bbox, sliderValues) {
-        this.minLat = bbox[1];
-        this.maxLat = bbox[3];
-        this.minLong = bbox[0];
-        this.maxLong = bbox[2];
-        this.sliderValues = sliderValues;
+function healthChartMacro() {
+    var chart = new splunkjs.UI.Charting.Chart($("#chart1"), splunkjs.UI.Charting.ChartType.COLUMN, false);
+    var chartMode = {
+        "chart.stackMode": "stacked"
     };
-
-    function pollutionChartMacro() {
-        var chart = new splunkjs.UI.Charting.Chart($("#chart1"), splunkjs.UI.Charting.ChartType.COLUMN, false);
-        var chartMode = {
-            "chart.stackMode": "stacked"
-        };
+    var macro = new splunkMacro(generateBBOX(), getSliderValues());
+    var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), getSliderValues());
-        var searchString = function() {
-            var macro = new splunkMacro(generateBBOX(), getSliderValues());
-            return " `pollution_chart(" +
-                macro.minLong + "," + macro.maxLong + "," + macro.minLat + "," + macro.minLat + "," + macro.sliders['pollution']['min'] +
-                "," + macro.sliders['pollution']['max'] +
-                "," + macro.sliders['crime']['min'] + "," + macro.sliders['crime']['max'] + "," + macro.sliders['health']['min'] + "," + macro.sliders['health']['max'] + ")`";
-        };
-        this.getMacroDef = function() {
-            // this regenerates the searchstring based on current values e.g call the macro function once 
-            return new macroDef(searchString(), function(results, err) {
-                chart.setData(results, chartmode);
-                chart.draw();
-            });
-        }
+        return " `health_chart(" +
+            macro.minLong + "," + macro.maxLong + "," + macro.minLat + "," + macro.minLat + "," + macro.sliders['pollution']['min'] +
+            "," + macro.sliders['pollution']['max'] +
+            "," + macro.sliders['crime']['min'] + "," + macro.sliders['crime']['max'] + "," + macro.sliders['health']['min'] + "," + macro.sliders['health']['max'] + ")`";
     };
+    this.getMacroDef = function() {
+        // this regenerates the searchstring based on current values e.g call the macro function once 
+        return new macroDef(searchString(), function(results, err) {
+            chart.setData(results, chartmode);
+            chart.draw();
+        });
+    }
+};
 
-    function crimeChartMacro() {
-        var chart = new splunkjs.UI.Charting.Chart($("#crimechart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
-        var chartMode = {
-            "chart.stackMode": "stacked"
-        };
+function crimeChartMacro() {
+    var chart = new splunkjs.UI.Charting.Chart($("#crimechart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
+    var chartMode = {
+        "chart.stackMode": "stacked"
+    };
+    var macro = new splunkMacro(generateBBOX(), getSliderValues());
+    var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), getSliderValues());
-        var searchString = function() {
-            var macro = new splunkMacro(generateBBOX(), getSliderValues());
-            return " `crime_chart(" +
-                macro.minLong + "," + macro.maxLong + "," + macro.minLat + "," + macro.minLat + "," + macro.sliders['pollution']['min'] +
-                "," + macro.sliders['pollution']['max'] +
-                "," + macro.sliders['crime']['min'] + "," + macro.sliders['crime']['max'] + "," + macro.sliders['health']['min'] + "," + macro.sliders['health']['max'] + ")`";
-        };
-        this.getMacroDef = function() {
-            // this regenerates the searchstring based on current values e.g call the macro function once 
-            return new macroDef(searchString(), function(results, err) {
-                chart.setData(results, chartmode);
-                chart.draw();
-            });
-        }
-
+        return " `crime_chart(" +
+            macro.minLong + "," + macro.maxLong + "," + macro.minLat + "," + macro.minLat + "," + macro.sliders['pollution']['min'] +
+            "," + macro.sliders['pollution']['max'] +
+            "," + macro.sliders['crime']['min'] + "," + macro.sliders['crime']['max'] + "," + macro.sliders['health']['min'] + "," + macro.sliders['health']['max'] + ")`";
     };
+    this.getMacroDef = function() {
+        // this regenerates the searchstring based on current values e.g call the macro function once 
+        return new macroDef(searchString(), function(results, err) {
+            chart.setData(results, chartmode);
+            chart.draw();
+        });
+    }
 
-    function cityListMacro() {
+};
 
+function cityListMacro() {
+
+    var macro = new splunkMacro(generateBBOX(), sliders);
+    var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), getSliderValues());
-        var searchString = function() {
-            var macro = new splunkMacro(generateBBOX(), getSliderValues());
-            return " `city_list(" +
-                macro.minLong + "," + macro.maxLong + "," + macro.minLat + "," + macro.minLat + "," + macro.sliders['pollution']['min'] +
-                "," + macro.sliders['pollution']['max'] +
-                "," + macro.sliders['crime']['min'] + "," + macro.sliders['crime']['max'] + "," + macro.sliders['health']['min'] + "," + macro.sliders['health']['max'] + ")`";
-        };
-        this.getMacroDef = function() {
-            // this regenerates the searchstring based on current values e.g call the macro function once 
-            return new macroDef(searchString(), function(results, err) {
-               console.log(results); 
-            });
-        }
+        return " `city_list(" +
+            macro.minLong + "," + macro.maxLong + "," + macro.minLat + "," + macro.minLat + "," + macro.sliders['pollution']['min'] +
+            "," + macro.sliders['pollution']['max'] +
+            "," + macro.sliders['crime']['min'] + "," + macro.sliders['crime']['max'] + "," + macro.sliders['health']['min'] + "," + macro.sliders['health']['max'] + ")`";
     };
+    this.getMacroDef = function() {
+        // this regenerates the searchstring based on current values e.g call the macro function once 
+        return new macroDef(searchString(), function(results, err) {
+            console.log(results);
+        });
+    }
+};
 
-    function macroDef(queryString, applyResults) {
-        this.queryString = queryString;
-        this.applyResults = applyResults;
-    };
+function macroDef(queryString, applyResults) {
+    this.queryString = queryString;
+    this.applyResults = applyResults;
+};
 
+function createMacro(sliderName){
 
-    function getSliderValues() {
-        var sliders = $('.slider');
-
-    };
+    switch(sliderName){
+        case '#slider-range-pollution':
+            splunkMacros.push(new pollutionChartMacro());
+        case '#slider-range-crime':
+            splunkMacros.push(new crimeChartMacro());
+        case '#slider-range-health':
+            splunkMacros.push(new healthChartMacro());
+        default:
+            console.log('no valid slider provided');
+    }
+};

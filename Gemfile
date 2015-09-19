@@ -30,6 +30,8 @@ gem 'devise'
 
 gem 'twitter-bootstrap-rails', :git => 'https://github.com/seyhunak/twitter-bootstrap-rails.git'
 gem 'splunk-sdk-ruby'
+
+gem 'jquery-ui-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
