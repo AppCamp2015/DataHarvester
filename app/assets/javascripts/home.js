@@ -1,3 +1,5 @@
+var sliders = {};
+
 function splunkSearch(){
     
     var obj= {};
@@ -16,32 +18,29 @@ function splunkSearch(){
     console.log('object for splunk search:', obj); 
 }
 
-function selectCategory(id){
-    var newLabel = document.createElement('label');
-    var newRangeFilter = document.createElement('input');
-    newRangeFilter.setAttribute('class',"rangeFilter");
-    newRangeFilter.setAttribute('type',"range");
-    newRangeFilter.setAttribute('id',id + "range");
-    newRangeFilter.setAttribute('min', "0");
-    newRangeFilter.setAttribute('max', "100");
-    newRangeFilter.setAttribute('value', "");
-    newRangeFilter.setAttribute('onchange', "splunkSearch()");
-    newLabel.innerHTML = id;
-    document.getElementById('timeSearch').appendChild(newLabel);
-    document.getElementById('timeSearch').appendChild(newRangeFilter);
-    document.getElementById(id).remove(); 
-}
-
-
 function addSlider(sliderId, valueId ) {
+    var sliderId = sliderId;
+    sliders[sliderId[0].id] = {};
+    console.log(sliderId);
+    var valueId = valueId;
     $( sliderId ).slider({
       range: true,
       min: 0,
       max: 100,
       values: [ 25, 75 ],
+      create: function(event,ui){
+        sliders[sliderId[0].id]['min'] = 25;
+        sliders[sliderId[0].id]['max'] = 75;
+      },
       slide: function( event, ui ) {
         $( valueId).val( ui.values[ 0 ] + "% - " + ui.values[ 1 ] + "%");
       },
+      change : function(event,ui){     
+        sliders[sliderId[0].id]['min'] = ui.values[0];
+        sliders[sliderId[0].id]['max'] = ui.values[1];
+        console.log(sliders);
+        executeSplunk();    
+      }
     });
     $( valueId ).val( $( sliderId ).slider( "values", 0 ) +
       "% - " + $( sliderId ).slider( "values", 1 ) + "%" );
