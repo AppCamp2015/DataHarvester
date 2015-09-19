@@ -232,7 +232,10 @@ function splunkMacro(bbox, sliderValues) {
 function pollutionChartMacro() {
     var chart = new splunkjs.UI.Charting.Chart($("#pollutionchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
     var chartMode = {
-        "chart.stackMode": "stacked"
+        "chart.stackMode": "default",
+        "chart.style": "shiny",
+        "axisTitleX.text": "Years",
+        "axisY2.enabled": 0
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
@@ -253,7 +256,10 @@ function pollutionChartMacro() {
 function healthChartMacro() {
     var chart = new splunkjs.UI.Charting.Chart($("#healthchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
     var chartMode = {
-        "chart.stackMode": "stacked"
+        "chart.stackMode": "default",
+        "chart.style": "shiny",
+        "axisTitleX.text": "Years",
+        "axisY2.enabled": 0
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
@@ -274,7 +280,10 @@ function healthChartMacro() {
 function crimeChartMacro() {
     var chart = new splunkjs.UI.Charting.Chart($("#crimechart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
     var chartMode = {
-        "chart.stackMode": "stacked"
+        "chart.stackMode": "default",
+        "chart.style": "shiny",
+        "axisTitleX.text": "Years",
+        "axisY2.enabled": 0
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
@@ -296,7 +305,6 @@ function crimeChartMacro() {
 function urbanChartMacro() {
     var chart = new splunkjs.UI.Charting.Chart($("#urbanchart"), splunkjs.UI.Charting.ChartType.PIE, false);
     var chartMode = {
-        "chart.stackMode": "stacked"
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
@@ -318,8 +326,6 @@ function urbanChartMacro() {
 function greenChartMacro() {
     var chart = new splunkjs.UI.Charting.Chart($("#greenchart"), splunkjs.UI.Charting.ChartType.PIE, false);
     var chartMode = {
-        "axisTitleX.text": "Years",
-        "axisY2.enabled": 0
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
