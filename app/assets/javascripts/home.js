@@ -232,7 +232,7 @@ function splunkMacro(bbox, sliderValues) {
 function pollutionChartMacro() {
     var chart = new splunkjs.UI.Charting.Chart($("#pollutionchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
     var chartMode = {
-        "chart.stackMode": "default",
+        "chart.stackMode": "stacked",
         "chart.style": "shiny",
         "axisTitleX.text": "Years",
         "axisTitleY.text": "",
