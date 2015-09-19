@@ -91,6 +91,7 @@ function loginToSplunk() {
 
 function handleSplunkJob(macroDef) {
 
+    macroDef.startLoading();
 
     var search = macroDef.queryString;
     var cancelled = false;
@@ -242,6 +243,8 @@ function pollutionChartMacro() {
         return new macroDef(searchString(), function(results, err) {
             chart.setData(results, chartMode);
             chart.draw();
+        }, function(){
+            console.log("show loading indicator for "+searchString());
         });
     }
 };
@@ -260,6 +263,8 @@ function healthChartMacro() {
         return new macroDef(searchString(), function(results, err) {
             chart.setData(results, chartMode);
             chart.draw();
+        }, function(){
+            console.log("show loading indicator for "+searchString());
         });
     }
 };
@@ -278,6 +283,8 @@ function crimeChartMacro() {
         return new macroDef(searchString(), function(results, err) {
             chart.setData(results, chartMode);
             chart.draw();
+        }, function(){
+            console.log("show loading indicator for "+searchString());
         });
     }
 
@@ -297,6 +304,8 @@ function urbanChartMacro() {
         return new macroDef(searchString(), function(results, err) {
             chart.setData(results, chartMode);
             chart.draw();
+        }, function(){
+            console.log("show loading indicator for "+searchString());
         });
     }
 
@@ -316,6 +325,8 @@ function greenChartMacro() {
         return new macroDef(searchString(), function(results, err) {
             chart.setData(results, chartMode);
             chart.draw();
+        }, function(){
+            console.log("show loading indicator for "+searchString());
         });
     }
 };
@@ -329,14 +340,15 @@ function cityListMacro() {
     };
     this.getMacroDef = function() {
         // this regenerates the searchstring based on current values e.g call the macro function once 
-        return new macroDef(searchString(), function(results, err) {});
+        return new macroDef(searchString(), function(results, err) {}, function(results, err) {});
     }
-};
+}
 
-function macroDef(queryString, applyResults) {
+function macroDef(queryString, applyResults, startLoading) {
     this.queryString = queryString;
     this.applyResults = applyResults;
-};
+    this.startLoading = startLoading;
+}
 
 function createMacro(sliderName) {
     switch (sliderName) {
