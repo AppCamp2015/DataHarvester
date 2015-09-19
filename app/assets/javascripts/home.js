@@ -395,18 +395,6 @@ function createMacro(sliderName) {
 function addMapMarkers(results){
 
     var points = [];
-    for (var i = 0; i < results['columns'][0].length; i++) {
-        points.push(new ol.Feature({
-                geometry: new ol.geom.Point(ol.proj.transform([results['columns'][1][i], results['columns'][2][i]], 'EPSG:4326', 'EPSG:3857')),
-                name: results['columns'][0][i]
-                })
-        );
-    }
-
-    // the vector source for the marker layer is defined by map.getLayers()[2].getSource();
-    // the source can be set by map.getLayers()[2].setSource( ol.source.Vector type)
-
-    console.log(iconFeature);
 
     var iconStyle = new ol.style.Style({
         image: new ol.style.Icon( /** @type {olx.style.IconOptions} */ ({
@@ -418,9 +406,23 @@ function addMapMarkers(results){
         }))
     });
 
+    for (var i = 0; i < results['columns'][0].length; i++) {
+        
+        points.push(new ol.Feature({
+                geometry: new ol.geom.Point(ol.proj.transform([results['columns'][1][i], results['columns'][2][i]], 'EPSG:4326', 'EPSG:3857')),
+                name: results['columns'][0][i]
+                })
+        );
+        points[i].setStyle(iconStyle);
+    }
+
+    // the vector source for the marker layer is defined by map.getLayers()[2].getSource();
+    // the source can be set by map.getLayers()[2].setSource( ol.source.Vector type)
+
+
+
     var pointSource = new ol.source.Vector({
-        features: points,
-        style: iconStyle
+        features: points
     });
-    map.getLayers()[2].setSource(pointSource);
+    map.getLayers()[1].setSource(pointSource);
 };
