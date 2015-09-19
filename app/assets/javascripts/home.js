@@ -232,7 +232,12 @@ function splunkMacro(bbox, sliderValues) {
 function pollutionChartMacro() {
     var chart = new splunkjs.UI.Charting.Chart($("#pollutionchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
     var chartMode = {
-        "chart.stackMode": "stacked"
+        "chart.stackMode": "default",
+        "chart.style": "shiny",
+        "axisTitleX.text": "Years",
+        "axisTitleY.text": "",
+        "axisY.minimumNumber": "0.0",
+        "axisY.maximumNumber": "1.0"
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
@@ -245,7 +250,6 @@ function pollutionChartMacro() {
             chart.setData(results, chartMode);
             chart.draw();
         }, function(){
-            console.log("show loading indicator for "+searchString());
             $("#pollutionchartloading").show();
         });
     }
@@ -254,7 +258,12 @@ function pollutionChartMacro() {
 function healthChartMacro() {
     var chart = new splunkjs.UI.Charting.Chart($("#healthchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
     var chartMode = {
-        "chart.stackMode": "stacked"
+        "chart.stackMode": "default",
+        "chart.style": "shiny",
+        "axisTitleX.text": "Years",
+        "axisTitleY.text": "",
+        "axisY.minimumNumber": "0.0",
+        "axisY.maximumNumber": "1.0"
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
@@ -267,7 +276,6 @@ function healthChartMacro() {
             chart.setData(results, chartMode);
             chart.draw();
         }, function(){
-            console.log("show loading indicator for "+searchString());
             $("#healthchartloading").show();
         });
     }
@@ -276,7 +284,12 @@ function healthChartMacro() {
 function crimeChartMacro() {
     var chart = new splunkjs.UI.Charting.Chart($("#crimechart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
     var chartMode = {
-        "chart.stackMode": "stacked"
+        "chart.stackMode": "default",
+        "chart.style": "shiny",
+        "axisTitleX.text": "Years",
+        "axisTitleY.text": "",
+        "axisY.minimumNumber": "0.0",
+        "axisY.maximumNumber": "1.0"
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
@@ -290,16 +303,14 @@ function crimeChartMacro() {
             chart.draw();
         }, function(){
             $("#crimechartloading").show();
-            console.log("show loading indicator for "+searchString());
         });
     }
 
 };
 
 function urbanChartMacro() {
-    var chart = new splunkjs.UI.Charting.Chart($("#urbanchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
+    var chart = new splunkjs.UI.Charting.Chart($("#urbanchart"), splunkjs.UI.Charting.ChartType.PIE, false);
     var chartMode = {
-        "chart.stackMode": "stacked"
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
@@ -313,16 +324,14 @@ function urbanChartMacro() {
             chart.draw();
         }, function(){
             $("#urbanchartloading").show();
-            console.log("show loading indicator for "+searchString());
         });
     }
 
 };
 
 function greenChartMacro() {
-    var chart = new splunkjs.UI.Charting.Chart($("#greenchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
+    var chart = new splunkjs.UI.Charting.Chart($("#greenchart"), splunkjs.UI.Charting.ChartType.PIE, false);
     var chartMode = {
-        "chart.stackMode": "stacked"
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
@@ -334,7 +343,6 @@ function greenChartMacro() {
             chart.setData(results, chartMode);
             chart.draw();
         }, function(){
-            console.log("show loading indicator for "+searchString());
         });
     }
 };
