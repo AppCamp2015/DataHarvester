@@ -245,7 +245,6 @@ function pollutionChartMacro() {
             chart.setData(results, chartMode);
             chart.draw();
         }, function(){
-            console.log("show loading indicator for "+searchString());
             $("#pollutionchartloading").show();
         });
     }
@@ -267,7 +266,6 @@ function healthChartMacro() {
             chart.setData(results, chartMode);
             chart.draw();
         }, function(){
-            console.log("show loading indicator for "+searchString());
             $("#healthchartloading").show();
         });
     }
@@ -290,7 +288,6 @@ function crimeChartMacro() {
             chart.draw();
         }, function(){
             $("#crimechartloading").show();
-            console.log("show loading indicator for "+searchString());
         });
     }
 
@@ -313,7 +310,6 @@ function urbanChartMacro() {
             chart.draw();
         }, function(){
             $("#urbanchartloading").show();
-            console.log("show loading indicator for "+searchString());
         });
     }
 
@@ -334,7 +330,6 @@ function greenChartMacro() {
             chart.setData(results, chartMode);
             chart.draw();
         }, function(){
-            console.log("show loading indicator for "+searchString());
         });
     }
 };
