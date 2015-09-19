@@ -264,7 +264,8 @@ function pollutionChartMacro() {
         "chart.stackMode": "stacked",
         "chart.style": "shiny",
         "axisTitleX.text": "Years",
-        "axisTitleY.text": ""
+        "axisTitleY.text": "",
+        "legend.verticalAlign": "bottom"
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
@@ -290,7 +291,8 @@ function healthChartMacro() {
         "axisTitleX.text": "Years",
         "axisTitleY.text": "",
         "axisY.minimumNumber": "0.0",
-        "axisY.maximumNumber": "1.0"
+        "axisY.maximumNumber": "1.0",
+        "legend.verticalAlign": "bottom"
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
@@ -314,7 +316,8 @@ function crimeChartMacro() {
         "chart.stackMode": "stacked",
         "chart.style": "shiny",
         "axisTitleX.text": "Years",
-        "axisTitleY.text": ""
+        "axisTitleY.text": "",
+        "legend.verticalAlign": "bottom"
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
