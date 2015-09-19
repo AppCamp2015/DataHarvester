@@ -58,6 +58,20 @@
 					  <input type="text" id="healthRateValue" class="indicatorValue" readonly > </input>
 					</p>
 					<div id="slider-range-health"></div>
+
+					<p>
+					  <%= link_to(image_tag("screens_health.png", :class => "healthRate", :alt => "healthRate", :size => "20", :title => 'healthRate')) %>
+					  <label for="urbannessRateValue" class="indicatorLabel"> Urbanization Rate:</label>
+					  <input type="text" id="urbannessRateValue" class="indicatorValue" readonly > </input>
+					</p>
+					<div id="slider-range-urbanness"></div>
+
+					<p>
+					  <%= link_to(image_tag("screens_health.png", :class => "healthRate", :alt => "healthRate", :size => "20", :title => 'healthRate')) %>
+					  <label for="greennessRateValue" class="indicatorLabel"> Green Cover:</label>
+					  <input type="text" id="greennessRateValue" class="indicatorValue" readonly > </input>
+					</p>
+					<div id="slider-range-greenness"></div>
 				</div>
     			<br><br>
     			<div id="adjustFilters" class="dropdown">
@@ -118,6 +132,8 @@
 		<div id="pollutionchart"></div>
 		<div id="crimechart"></div>
 		<div id="healthchart"></div>
+		<div id="greenchart"></div>
+		<div id="urbanchart"></div>
 		</div>
 </div>
 </div>
