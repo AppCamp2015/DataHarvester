@@ -263,10 +263,12 @@ function healthChartMacro() {
     this.getMacroDef = function() {
         // this regenerates the searchstring based on current values e.g call the macro function once 
         return new macroDef(searchString(), function(results, err) {
+            $("#healthchartloading").hide();
             chart.setData(results, chartMode);
             chart.draw();
         }, function(){
             console.log("show loading indicator for "+searchString());
+            $("#healthchartloading").show();
         });
     }
 };
@@ -278,14 +280,16 @@ function crimeChartMacro() {
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
-        return generateQueryString('pollution_chart', macro);
+        return generateQueryString('crime_chart', macro);
     };
     this.getMacroDef = function() {
         // this regenerates the searchstring based on current values e.g call the macro function once 
         return new macroDef(searchString(), function(results, err) {
+            $("#crimechartloading").hide();
             chart.setData(results, chartMode);
             chart.draw();
         }, function(){
+            $("#crimechartloading").show();
             console.log("show loading indicator for "+searchString());
         });
     }
@@ -304,9 +308,11 @@ function urbanChartMacro() {
     this.getMacroDef = function() {
         // this regenerates the searchstring based on current values e.g call the macro function once 
         return new macroDef(searchString(), function(results, err) {
+            $("#urbanchartloading").hide();
             chart.setData(results, chartMode);
             chart.draw();
         }, function(){
+            $("#urbanchartloading").show();
             console.log("show loading indicator for "+searchString());
         });
     }
