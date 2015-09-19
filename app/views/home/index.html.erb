@@ -124,85 +124,52 @@
 	
 	<div class="chartcontainer">
 		<div>
-			<table>
-				<tr>
-					<td>
-						<%= link_to(image_tag("screens_pollution.png", :class => "pollutionRate", :alt => "pollutionRate", :size => "20", :title => 'pollutionRate')) %>
-					</td>
-					<td>
-						<h2>Pollution</h2>
-					</td>
-					<td>
-						<div id="pollutionchartloading">LOADING</div>
-					</td>
-				</tr>
-			</table>
+			<div class="panelheader-div">
+			<span class="column-left"> <%= link_to(image_tag("screens_pollution.png", :class => "pollutionRate", :alt => "pollutionRate", :size => "48", :title => 'pollutionRate')) %></span>
+			<span class="column-center"><h2 style="height:48px">Pollution</h2></span>
+			<span class="column-right"> <%= link_to(image_tag("loadingindicator.gif", :class => "pollutionchartloading", :alt => "loadingindicator", :size => "32", :title => 'loadingindicator')) %></span>
+			</div>
 			<div id="pollutionchart">
 			</div>
 		</div>
 		<div>
-			<table>
-				<tr>
-					<td>
-						<%= link_to(image_tag("screens_crime.png", :class => "crimeRate", :alt => "crimeRate", :size => "20", :title => 'crimeRate')) %>
-					</td>
-					<td>
-						<h2>Crime</h2>
-					</td>
-					<td>
-						<div id="crimechartloading">LOADING</div>
-					</td>
-				</tr>
-			</table>
+			<div class="panelheader-div">
+			<span class="column-left"> <%= link_to(image_tag("screens_crime.png", :class => "crimeRate", :alt => "crimeRate", :size => "48", :title => 'crimeRate')) %></span>
+			<span class="column-center"><h2 style="height:48px">Crime</h2></span>
+			<span class="column-right"> <%= link_to(image_tag("loadingindicator.gif", :class => "crimechartloading", :alt => "loadingindicator", :size => "32", :title => 'loadingindicator')) %></span>
+			</div>
 			<div id="crimechart"></div>
 		</div>
 		<div>
-			<table>
-				<tr>
-					<td>
-						ICON
-					</td>
-					<td>
-						<h2>Health</h2>
-					</td>
-					<td>
-						<div id="healthchartloading">LOADING</div>
-					</td>
-				</tr>
-			</table>
+			<div class="panelheader-div">
+			<span class="column-left"> <%= link_to(image_tag("screens_health.png", :class => "healthRate", :alt => "healthRate", :size => "48", :title => 'healthRate')) %></span>
+			<span class="column-center"><h2 style="height:48px">Health</h2></span>
+			<span class="column-right"> <%= link_to(image_tag("loadingindicator.gif", :class => "healthchartloading", :alt => "loadingindicator", :size => "32", :title => 'loadingindicator')) %></span>
+			</div>
 			<div id="healthchart"></div>
 		</div>
 		<div>
-			<table>
-				<tr>
-					<td>
-						ICON
-					</td>
-					<td>
-						<h2>Greenness</h2>
-					</td>
-					<td>
-						<div id="greenchartloading">LOADING</div>
-					</td>
-				</tr>
-			</table>
+			<div class="panelheader-div">
+			<span class="column-left"> <%= link_to(image_tag("screens_greenness.png", :class => "greennessRate", :alt => "greennessRate", :size => "48", :title => 'healthRate')) %></span>
+			<span class="column-center"><h2 style="height:48px">Greenness</h2></span>
+			<span class="column-right"> <%= link_to(image_tag("loadingindicator.gif", :class => "greenchartloading", :alt => "loadingindicator", :size => "32", :title => 'loadingindicator')) %></span>
+			</div>
 			<div id="greenchart"></div>
 		</div>
 		<div>
-			<table>
-				<tr>
-					<td>
-						ICON
-					</td>
-					<td>
-						<h2>Urbanness</h2>
-					</td>
-					<td>
-						<div id="urbanchartloading">LOADING</div>
-					</td>
-				</tr>
-			</table>
+			<div class="panelheader-div">
+			<span class="column-left"> <%= link_to(image_tag("screens_greenness.png", :class => "urbannessRate", :alt => "urbannessRate", :size => "48", :title => 'healthRate')) %></span>
+			<span class="column-center"><h2 style="height:48px">Urbanness</h2></span>
+			<span class="column-right"> <%= link_to(image_tag("loadingindicator.gif", :class => "urbanchartloading", :alt => "loadingindicator", :size => "32", :title => 'loadingindicator')) %></span>
+			</div>
 			<div id="urbanchart"></div>
+		</div>
+
+		<div>
+		<div id="twittertagcloud" style="width:100%; height:400px">
+		</div>
+
+
 		</div>
 	</div>
 </div>

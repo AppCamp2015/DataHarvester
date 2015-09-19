@@ -16,6 +16,35 @@ $('document').ready(function() {
     addSlider($('#slider-range-greenness'), $('#greennessRateValue'));
     splunkMacros.push(new cityListMacro());
     executeSplunk();
+
+
+
+    var words = [
+        {"text":"Hiring","weight":"127"},
+        {"text":"Job","weight":"100"},
+        {"text":"Jobs","weight":"89"},
+        {"text":"job","weight":"89"},
+        {"text":"CareerArc","weight":"87"},
+        {"text":"hiring","weight":"40"},
+        {"text":"Hospitality","weight":"28"},
+        {"text":"ALDUBMostAwaitedDate","weight":"27"},
+        {"text":"Retail","weight":"27"},
+        {"text":"Veterans","weight":"20"},
+        {"text":"Nursing","weight":"18"},
+        {"text":"Sales","weight":"16"},
+        {"text":"CustomerService","weight":"13"},
+        {"text":"IT","weight":"12"},
+        {"text":"trndnl","weight":"12"},
+        {"text":"photo","weight":"11"},
+        {"text":"Healthcare","weight":"10"},
+        {"text":"love","weight":"8"},
+        {"text":"SONIC","weight":"7"},
+        {"text":"BusinessMgmt","weight":"6"}
+    ];           
+    $('#twittertagcloud').jQCloud(words);
+
+
+
 });
 
 
@@ -341,6 +370,47 @@ function greenChartMacro() {
     }
 };
 
+function twitterTopsMacro() {
+    var searchString = function() {
+        var macro = new splunkMacro(generateBBOX(), sliders);
+        return generateQueryString('twitter', macro);
+    };
+    this.getMacroDef = function() {
+        // this regenerates the searchstring based on current values e.g call the macro function once 
+        return new macroDef(searchString(), function(results, err) {
+            // fill tagcloud with word : number here 
+            var words = [
+                {"text":"Hiring","weight":"127"},
+                {"text":"Job","weight":"100"},
+                {"text":"Jobs","weight":"89"},
+                {"text":"job","weight":"89"},
+                {"text":"CareerArc","weight":"87"},
+                {"text":"hiring","weight":"40"},
+                {"text":"Hospitality","weight":"28"},
+                {"text":"ALDUBMostAwaitedDate","weight":"27"},
+                {"text":"Retail","weight":"27"},
+                {"text":"Veterans","weight":"20"},
+                {"text":"Nursing","weight":"18"},
+                {"text":"Sales","weight":"16"},
+                {"text":"CustomerService","weight":"13"},
+                {"text":"IT","weight":"12"},
+                {"text":"trndnl","weight":"12"},
+                {"text":"photo","weight":"11"},
+                {"text":"Healthcare","weight":"10"},
+                {"text":"love","weight":"8"},
+                {"text":"SONIC","weight":"7"},
+                {"text":"BusinessMgmt","weight":"6"}
+            ];           
+            var words = results
+            $('#twittertagcloud').jQCloud(words);
+
+        }, function(){
+        },
+        "json_rows");
+    }
+};
+
+
 
 function cityListMacro() {
 
@@ -354,8 +424,10 @@ function cityListMacro() {
     }
 }
 
-function macroDef(queryString, applyResults, startLoading) {
+function macroDef(queryString, applyResults, startLoading, outputmode) {
     this.queryString = queryString;
+    if(outputmode==undefined) outputmode = "json_cols"
+    this.outputmode = outputmode;
     this.applyResults = applyResults;
     this.startLoading = startLoading;
 }

@@ -113,3 +113,23 @@ html, body {
 li{
 	padding: 2px;
 }
+
+
+.panelheader-div { 
+vertical-align: middle;
+min-height: 48px;
+height: 48px;
+background: rgba(128,128,128,1);
+background: -moz-linear-gradient(left, rgba(128,128,128,1) 0%, rgba(246,246,246,1) 53%, rgba(255,255,255,1) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(128,128,128,1)), color-stop(53%, rgba(246,246,246,1)), color-stop(100%, rgba(255,255,255,1)));
+background: -webkit-linear-gradient(left, rgba(128,128,128,1) 0%, rgba(246,246,246,1) 53%, rgba(255,255,255,1) 100%);
+background: -o-linear-gradient(left, rgba(128,128,128,1) 0%, rgba(246,246,246,1) 53%, rgba(255,255,255,1) 100%);
+background: -ms-linear-gradient(left, rgba(128,128,128,1) 0%, rgba(246,246,246,1) 53%, rgba(255,255,255,1) 100%);
+background: linear-gradient(to right, rgba(128,128,128,1) 0%, rgba(246,246,246,1) 53%, rgba(255,255,255,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ededed', endColorstr='#ffffff', GradientType=1 );
+
+}
+.column-left{ float: left; width: 33%; }
+.column-center{  width: 33%; vertical-align: middle; max-height: 48px; padding-top:12px}
+.column-right{ float: right; width: 33%; text-align: right; }
+
