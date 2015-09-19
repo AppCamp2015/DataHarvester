@@ -94,11 +94,12 @@ function handleSplunkJob(macroDef) {
     var cancelled = false;
 
     service.oneshotSearch(
-        search, {},
+        search, {output_mode:"json_cols"},
         function(err, results) {
             if (cancelled) {
                 return
             };
+		if(err){console.log(err)};
             macroDef.applyResults(results, err);
         }
     );
