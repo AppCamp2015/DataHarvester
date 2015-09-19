@@ -132,6 +132,7 @@ function generateMap() {
         format: new ol.format.GeoJSON()
     });
 
+
     map = new ol.Map({
         target: 'map',
         layers: [
@@ -142,9 +143,7 @@ function generateMap() {
             }),
             new ol.layer.Vector({
                 source: vectorSource
-
-
-            })
+            })    
         ],
         view: new ol.View({
             center: ol.proj.transform([37.41, 8.82], 'EPSG:4326', 'EPSG:3857'),
@@ -354,6 +353,9 @@ function cityListMacro() {
         // this regenerates the searchstring based on current values e.g call the macro function once 
         return new macroDef(searchString(), function(results, err) {
                 console.log(results);
+                // here goes the code for rendering the results. 
+                addMapMarkers(results);
+
             },
             function(results, err) {
 
@@ -388,4 +390,37 @@ function createMacro(sliderName) {
             console.log('no valid slider provided');
             break;
     }
+};
+
+function addMapMarkers(results){
+
+    var points = [];
+    for (var i = 0; i < results['columns'][0].length; i++) {
+        points.push(new ol.Feature({
+                geometry: new ol.geom.Point(ol.proj.transform([results['columns'][1][i], results['columns'][2][i]], 'EPSG:4326', 'EPSG:3857')),
+                name: results['columns'][0][i]
+                })
+        );
+    }
+
+    // the vector source for the marker layer is defined by map.getLayers()[2].getSource();
+    // the source can be set by map.getLayers()[2].setSource( ol.source.Vector type)
+
+    console.log(iconFeature);
+
+    var iconStyle = new ol.style.Style({
+        image: new ol.style.Icon( /** @type {olx.style.IconOptions} */ ({
+            anchor: [0.5, 46],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'pixels',
+            opacity: 0.75,
+            src: 'https://developer.mapquest.com/sites/default/files/mapquest/osm/mq_logo.png'
+        }))
+    });
+
+    var pointSource = new ol.source.Vector({
+        features: points,
+        style: iconStyle
+    });
+    map.getLayers()[2].setSource(pointSource);
 };
