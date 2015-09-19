@@ -280,14 +280,12 @@ function healthChartMacro() {
 };
 
 function crimeChartMacro() {
-    var chart = new splunkjs.UI.Charting.Chart($("#crimechart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
+    var chart = new splunkjs.UI.Charting.Chart($("#crimechart"), splunkjs.UI.Charting.ChartType.AREA, false);
     var chartMode = {
-        "chart.stackMode": "default",
+        "chart.stackMode": "stacked",
         "chart.style": "shiny",
         "axisTitleX.text": "Years",
-        "axisTitleY.text": "",
-        "axisY.minimumNumber": "0.0",
-        "axisY.maximumNumber": "1.0"
+        "axisTitleY.text": ""
     };
     var searchString = function() {
         var macro = new splunkMacro(generateBBOX(), sliders);
