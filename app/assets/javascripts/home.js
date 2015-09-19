@@ -294,7 +294,7 @@ function crimeChartMacro() {
 };
 
 function urbanChartMacro() {
-    var chart = new splunkjs.UI.Charting.Chart($("#urbanchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
+    var chart = new splunkjs.UI.Charting.Chart($("#urbanchart"), splunkjs.UI.Charting.ChartType.PIE, false);
     var chartMode = {
         "chart.stackMode": "stacked"
     };
@@ -316,7 +316,7 @@ function urbanChartMacro() {
 };
 
 function greenChartMacro() {
-    var chart = new splunkjs.UI.Charting.Chart($("#greenchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
+    var chart = new splunkjs.UI.Charting.Chart($("#greenchart"), splunkjs.UI.Charting.ChartType.PIE, false);
     var chartMode = {
         "chart.stackMode": "stacked"
     };
