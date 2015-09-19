@@ -45,7 +45,6 @@ function splunkSearch() {
 function addSlider(sliderId, valueId) {
     
     var sliderId = sliderId;
-    console.log(sliderId);
     var valueId = valueId;
     $(sliderId).slider({
         range: true,
@@ -123,7 +122,6 @@ function handleSplunkJob(macroDef) {
                         return;
                     }
                     thisjob = null;
-                    console.log(results);
                     macroDef.applyResults(results, err);
                 });
             }
@@ -261,7 +259,6 @@ function splunkMacro(bbox, sliderValues) {
 };
 
 function pollutionChartMacro() {
-    console.log("creating new chart macro");
     var chart = new splunkjs.UI.Charting.Chart($("#pollutionchart"), splunkjs.UI.Charting.ChartType.COLUMN, false);
     var chartMode = {
         "chart.stackMode": "stacked"
@@ -364,7 +361,6 @@ function cityListMacro() {
     this.getMacroDef = function() {
         // this regenerates the searchstring based on current values e.g call the macro function once 
         return new macroDef(searchString(), function(results, err) {
-            console.log(results);
         });
     }
 };
