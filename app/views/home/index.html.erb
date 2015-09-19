@@ -1,6 +1,4 @@
-<div id="fixedContent">
-
-<nav id="headerBar" class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default" role="navigation">
 
 	<%= link_to(image_tag("screens_applogo-grey.png", :class => "headerLogo", :alt => "logo", :size => "20", :title => 'gQuery')) %>
 
@@ -25,13 +23,18 @@
 	</ul>
 </nav>
 	
+<div class="fullwidth-container">
 	<div class="row">
 		<aside class="span5" id="queryBar"><!-- Sidebar starts here  -->    
 
 <div class="row">
           <div class="filterValues">
             <form>
-    			<div id="sliderContainer"> 
+    			<div class="form-group">
+        			<label for="searchName" class="SearchLabel">Search name:</label>
+  					<br><br>
+    			</div>
+        		<div id="sliderContainer"> 
 					<p>
 					  <%= link_to(image_tag("screens_crime.png", :class => "crimeRate", :alt => "crimeRate", :size => "20", :title => 'crimeRate')) %>
 					  <label for="crimeRateValue" class="indicatorLabel"> Crime Rate:</label>
@@ -64,7 +67,7 @@
 					<div id="slider-range-urbanness"></div>
 
 					<p>
-					  <%= link_to(image_tag("screens_greenness.png", :class => "healthRate", :alt => "healthRate", :size => "20", :title => 'healthRate')) %>
+					  <%= link_to(image_tag("screens_health.png", :class => "healthRate", :alt => "healthRate", :size => "20", :title => 'healthRate')) %>
 					  <label for="greennessRateValue" class="indicatorLabel"> Green Cover:</label>
 					  <input type="text" id="greennessRateValue" class="indicatorValue" readonly > </input>
 					</p>
@@ -76,7 +79,14 @@
     			<button id="addFilter" type="button" data-toggle="dropdown" class="dropdown-toggle addFilter btn btn-primary" >+
     				<span class="caret"></span>
     				</button>
-          </ul>
+     		   <ul class="dropdown-menu" id="dropdownList" aria-labelledby="dropdownMenu1">
+            <li id="Health-Pollution" onclick="selectCategory(id)">Health/ Pollution</li>
+            <li id="Safety-Crime" onclick="selectCategory(id)">Safety/ Crime</li>
+            <li id="Economy" onclick="selectCategory(id)">Economic Factors</li>
+            <li id="Infrastructure" onclick="selectCategory(id)">Infrastructure</li>
+            <li class="divider"></li>
+            <li id="GeneralHealthIndicator" onclick="selectCategory(id)">OverallHealth</li>
+           </ul>
     </ul>
 </div>
 			</div>	
@@ -84,7 +94,13 @@
            </div>
          </div>
         </aside>
+        <script>
+        	$(document).ready(function() {
+        		$("#queryBar").css("height", $(".fullwidth-container").height());
+				// $('#queryBar').hide();
+        	});
 
+        </script>
         <script type="text/javascript">
     		$('.createQuery').on('click', function(){
 		     if( $('#queryBar').is(':visible') ) {
@@ -105,7 +121,7 @@
 		    <div id="map" class="map"></div>
 		</div>	
 	</div>
-</div>	
+	
 	<div class="chartcontainer">
 		<div>
 			<table>
@@ -189,5 +205,6 @@
 			<div id="urbanchart"></div>
 		</div>
 	</div>
+</div>
 </div>
 </div>
