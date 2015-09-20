@@ -451,6 +451,10 @@ function createMacro(sliderName) {
 
 function addMapMarkers(results){
 
+    if(results == null){
+        console.log("no results received");
+        return;
+    }
     var points = [];
 
     var iconStyle = new ol.style.Style({
