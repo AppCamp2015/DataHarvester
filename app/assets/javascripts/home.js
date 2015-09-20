@@ -15,6 +15,7 @@ $('document').ready(function() {
     addSlider($('#slider-range-urbanness'), $('#urbannessRateValue'));
     addSlider($('#slider-range-greenness'), $('#greennessRateValue'));
     splunkMacros.push(new cityListMacro());
+    splunkMacros.push(new twitterTopsMacro());
     executeSplunk();
 
 
