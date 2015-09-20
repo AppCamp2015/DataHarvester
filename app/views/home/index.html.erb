@@ -41,7 +41,6 @@
 						</p>
 		 
 						<div id="slider-range-crime"></div>
-
 						<p>
 						  <%= link_to(image_tag("screens_pollution.png", :class => "pollutionRate", :alt => "pollutionRate", :size => "20", :title => 'pollutionRate')) %>
 						  <label for="pollutionRateValue" class="indicatorLabel"> Pollution Rate:</label>
@@ -49,8 +48,6 @@
 						</p>
 		 
 						<div id="slider-range-pollution"></div>
-	 
-
 						<p>
 						  <%= link_to(image_tag("screens_health.png", :class => "healthRate", :alt => "healthRate", :size => "20", :title => 'healthRate')) %>
 						  <label for="healthRateValue" class="indicatorLabel"> Pollution Rate:</label>
@@ -92,8 +89,11 @@
         </aside>
     </div>
 
-	<div class="col-12">
+
+	<div class="col-12" style="position: fixed; z-index: 100;">
 	    <div id="map" class="map"></div>
+	</div>
+	<div style="display: block; box-sizing: border-box; height: 301px;">
 	</div>
 
 	<div class="chartcontainer">
