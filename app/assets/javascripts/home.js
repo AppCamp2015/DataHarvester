@@ -126,7 +126,7 @@ function handleSplunkJob(macroDef) {
     var search = macroDef.queryString;
     var cancelled = false;
     service.oneshotSearch(
-        search, {output_mode : "json_cols"},
+        search, {output_mode: macroDef.outputmode },
         function(err, results) {
             if (cancelled) {
                 return
@@ -409,7 +409,7 @@ function twitterTopsMacro() {
                 {"text":"SONIC","weight":"7"},
                 {"text":"BusinessMgmt","weight":"6"}
             ];           
-            var words = results
+            var words = results;
             $('#twittertagcloud').jQCloud(words);
 
         }, function(){
@@ -442,7 +442,7 @@ function cityListMacro() {
 
 function macroDef(queryString, applyResults, startLoading, outputmode) {
     this.queryString = queryString;
-    if(outputmode==undefined) outputmode = "json_cols"
+    if(outputmode==undefined) outputmode = "json_cols";
     this.outputmode = outputmode;
     this.applyResults = applyResults;
     this.startLoading = startLoading;
