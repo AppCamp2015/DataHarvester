@@ -408,8 +408,12 @@ function twitterTopsMacro() {
                 {"text":"love","weight":"8"},
                 {"text":"SONIC","weight":"7"},
                 {"text":"BusinessMgmt","weight":"6"}
-            ];           
-            var words = results;
+            ];
+
+            words = results.rows.map(function(r){
+                    return {"text":r[0],"weight":r[1]};
+                });
+            //var words = results;
             $('#twittertagcloud').jQCloud(words);
 
         }, function(){
